@@ -38,12 +38,14 @@ x-tagGroups:
     - Dictionaries
     - Reports
     - Identification
+
+
 paths:
   /v1/tunnels:
     x-summary: List and create tunnels
     get:
       tags:
-        - "Tunnels"
+        - "Account"
       summary: List All Tunnels
       responses:
         200:
