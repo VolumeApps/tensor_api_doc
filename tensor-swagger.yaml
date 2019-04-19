@@ -560,6 +560,7 @@ definitions:
         type: integer
       type:
         type: string
+        description: "Enum: `'city'` `'state'` `'country'` Geo location object type"
       name:
         type: string
         description: "Name of geo location"
