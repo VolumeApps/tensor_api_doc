@@ -27,9 +27,7 @@ tags:
   - name: Account
     description: "You can check how much credits are left using the account/info endpoint."
   - name: Reports
-    description: "Creates new audience data report. Both for likers and followers at the same time.
-
-    We strongly recommend to use user's userId rather than username or link wherever possible, as Influencers often change their usernames. User IDs, on the other hand, are constant for a given user, and so storing and making lookups by user ID will help avoid unexpected behaviour."
+    description: "Creates new audience data report. Both for likers and followers at the same time. We strongly recommend to use user's userId rather than username or link wherever possible, as Influencers often change their usernames. User IDs, on the other hand, are constant for a given user, and so storing and making lookups by user ID will help avoid unexpected behaviour."
   - name: Identification
     description: "Inputs are your public endpoints. Each input serves as an inbox that you can supply to your webhooks producer (ie: Github, Docker, IFTTT)"
 
