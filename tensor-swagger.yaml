@@ -672,9 +672,10 @@ definitions:
       properties:
         id:
           type: integer
-          required: true
         weight:
           type: number
+      required:
+        - id
 
   AudGender:
     title: Audience Gender
@@ -682,9 +683,10 @@ definitions:
     properties:
       code:
         type: integer
-        required: true
       weight:
         type: number
+    required:
+        - code
 
   AudGeo:
     title: Audience Geo
@@ -693,9 +695,10 @@ definitions:
       properties:
         id:
           type: integer
-          required: true
         weight:
           type: number
+      required:
+        - id
 
   AudLang:
     title: Audience Lang
@@ -703,9 +706,10 @@ definitions:
     properties:
       code:
         type: string
-        required: true
       weight:
         type: number
+    required:
+        - code
 
   AudRace:
     title: Audience Race
@@ -713,9 +717,10 @@ definitions:
     properties:
       code:
         type: string
-        required: true
       weight:
         type: number
+    required:
+        - code
 
   Engagements:
     title: Engagements
@@ -779,9 +784,10 @@ definitions:
     properties:
       value:
         type: number
-        required: true
       operator:
         type: string
+    required:
+        - value
 
 
 
