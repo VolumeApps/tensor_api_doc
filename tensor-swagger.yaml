@@ -829,6 +829,36 @@ definitions:
     required:
         - value
 
+  Search Response:
+    title: Search Response
+    type: object
+    properties:
+      total:
+        type: integer
+      users:
+        type: array
+        items:
+          type: object
+          properties:
+            user_id:
+              type: string
+            name:
+              type: string
+            username:
+              type: string
+            url:
+              type: string
+            picture:
+              type: string
+            followers:
+              type: integer
+            engagement_rate:
+              type: number
+            match:
+              type: object
+              properties:
+                extra:
+                  type: object
 
 
 
