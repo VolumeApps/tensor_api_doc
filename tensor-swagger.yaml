@@ -657,6 +657,7 @@ definitions:
       properties:
         code:
           type: string
+          required: true
         weight:
           type: number
 
@@ -667,6 +668,7 @@ definitions:
       properties:
         id:
           type: integer
+          required: true
         weight:
           type: number
 
@@ -676,6 +678,7 @@ definitions:
     properties:
       code:
         type: integer
+        required: true
       weight:
         type: number
 
@@ -685,6 +688,7 @@ definitions:
     properties:
       id:
         type: integer
+        required: true
       weight:
         type: number
 
@@ -694,6 +698,7 @@ definitions:
     properties:
       code:
         type: string
+        required: true
       weight:
         type: number
 
@@ -703,6 +708,7 @@ definitions:
     properties:
       code:
         type: string
+        required: true
       weight:
         type: number
 
@@ -767,6 +773,7 @@ definitions:
     properties:
       value:
         type: number
+        required: true
       operator:
         type: string
 
