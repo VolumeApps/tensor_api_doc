@@ -62,8 +62,7 @@ paths:
         200:
           description: Successful
           schema:
-            items:
-              $ref: "#/definitions/location_response"
+            $ref: "#/definitions/location_response"
           examples:
             application/json:
               - id: 122604
@@ -93,8 +92,7 @@ paths:
         200:
           description: Successful
           schema:
-            items:
-              $ref: "#/definitions/language_response"
+            $ref: "#/definitions/language_response"
           examples:
             application/json:
               status: true
