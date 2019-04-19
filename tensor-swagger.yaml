@@ -62,17 +62,17 @@ paths:
           examples:
             application/json:
               - id: 122604
-                type: "city"
+                type: ["city"]
                 name: "Chicago"
                 title: "Chicago, Illinois, United States"
-                state: 122586
-                country: 148838
+                state: [ id: 122586 ]
+                country: [ id: 148838 ]
               - id: 127190
-                type: "city"
+                type: ["city"]
                 name: "East Chicago"
                 title: "East Chicago, Indiana, United States"
-                state: 161816
-                country: 148838
+                state: [ id: 161816 ]
+                country: [ id: 148838 ]
     post:
       tags:
         - "Tunnels"
