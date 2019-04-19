@@ -48,11 +48,18 @@ paths:
         - "Dictionaries"
       summary: List Locations
       parameters:
-        - name: query
-          in: query
-          required: true
-          schema:
-            $ref: "#/definitions/location_query"
+        - in: query
+          name: search
+          type: string
+          description: Search query
+        - in: query
+          name: limit
+          type: integer
+          description: "Limit search results (Default: `10`)"
+        - in: query
+          name: types
+          type: string
+          description: "Limit search results to these types -> city, state, or country"
       responses:
         200:
           description: Successful
@@ -539,23 +546,7 @@ paths:
 # --------------------------- DEFINITIONS ---------------------------
 
 definitions:
-  location_query:
-    title: Locations Query
-    type: object
-    properties:
-      search:
-        type: string
-        description: "Search query"
-      limit:
-        type: integer
-        description: "Limit search results (Default: `10`)"
-      types:
-        type: string
-        description: "Limit search results to these types -> city, state, or country"
-    example:
-      search: "Chicago"
-      limit: 5
-      types: "city"
+
 
   location_response:
     title: Locations Response
