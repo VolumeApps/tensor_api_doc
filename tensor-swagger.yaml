@@ -652,21 +652,23 @@ definitions:
 
   AudAge:
     title: Audience Age
-    type: object
-    properties:
-      code:
-        type: string
-      weight:
-        type: number
+    items:
+      type: object
+      properties:
+        code:
+          type: string
+        weight:
+          type: number
 
   AudBrand:
     title: Audience Brand
-    type: object
-    properties:
-      id:
-        type: integer
-      weight:
-        type: number
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        weight:
+          type: number
 
   AudGender:
     title: Audience Gender
