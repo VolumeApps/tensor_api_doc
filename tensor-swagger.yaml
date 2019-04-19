@@ -671,9 +671,59 @@ definitions:
         type: boolean
         description: "Has contact details"
     example:
-      name: tunnel-x
-      subdomain: tunnelx
-      destination: http://localhost:4000
+      search:
+        audience_age:
+          - code: "18-24"
+            weight: 0.01
+        audience_brand:
+          - id: 0
+            weight: 0.05
+        audience_brand_category:
+          - id: 0
+            weight: 0.05
+        audience_gender:
+          code: "MALE"
+          weight: 0.05
+        audience_geo:
+          - id: 0
+            weight: 0.05
+        audience_lang:
+          code: "en"
+          weight: 0.2
+        audience_race:
+          code: "Black"
+          weight: 0.3
+        brand:
+          - 0
+        brand_category:
+          - 0
+        engagements:
+          left_number: 1000
+          right_number: 200000
+        followers:
+          left_number: 500000
+          right_number: 1000000
+        gender:
+          code: "MALE"
+        age:
+          left_number: "18"
+          right_number: "35"
+        geo:
+          - id: 0
+        lang:
+          code: "es"
+        race:
+          code: "White"
+        text: "twitch"
+        engagement_rate:
+          value: 0
+          operator: "gte"
+        is_business: true
+        has_ads: true
+        has_email: true
+
+
+
 
   AudAge:
     title: Audience Age
