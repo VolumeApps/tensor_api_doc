@@ -46,7 +46,7 @@ paths:
     get:
       tags:
         - "Dictionaries"
-      summary: List geo locations under certain filters.
+      summary: List Locations.
       parameters:
         - name: body
           in: body
@@ -538,7 +538,10 @@ definitions:
       types:
         type: string
         description: "Limit search results to these types -> city, state, or country"
-
+    example:
+      search: "Chicago"
+      limit: 5
+      types: "city"
 
 
 
