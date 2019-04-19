@@ -39,6 +39,35 @@ x-tagGroups:
       - Identification
 
 paths:
+  /brands:
+    x-summary: List Brands & Interests
+    get:
+      tags:
+        - "Dictionaries"
+      summary: List Brands & Interests
+      description: "List of all interests and brand that can be used as filter in Search or may be returned in Audience Data report."
+      responses:
+        200:
+          description: Successful
+          schema:
+            $ref: "#/definitions/brands_response"
+          examples:
+            application/json:
+              status: true
+              data:
+                interests:
+                  - id: 1
+                    name: "Television & Film"
+                    count: 68765028
+                    deprecated: false
+                brands:
+                  - id: 2
+                    name: "20th Century Fox"
+                    interest:
+                      - id: 1
+                    count: 380893
+                    deprecated: false
+
   /locations:
     x-summary: List Locations
     get:
@@ -163,6 +192,54 @@ paths:
 # --------------------------- DEFINITIONS ---------------------------
 
 definitions:
+  brands_response:
+    title: Brands Response
+    type: object
+    properties:
+      success:
+          type: boolean
+      data:
+        type: object
+        $ref: "#/definitions/BrandsData"
+
+  BrandsData:
+    title: Brands & Interests
+    type: object
+    properties:
+      interests:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            count:
+              type: integer
+            deprecated:
+              type: boolean
+      brands:
+        type: array
+        items:
+          type: object
+          properties:
+            id:
+              type: integer
+            name:
+              type: string
+            interest:
+              type: array
+              items:
+                type: object
+                properties:
+                  id:
+                    type: integer
+            count:
+              type: integer
+            deprecated:
+              type: boolean
+
   location_response:
     title: Locations Response
     type: object
