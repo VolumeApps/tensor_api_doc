@@ -648,10 +648,13 @@ definitions:
         $ref: "#/definitions/EngageRate"
       is_business:
         type: boolean
+        description: "Only business account"
       has_ads:
         type: boolean
+        description: "Has sponsored posts"
       has_email:
         type: boolean
+        description: "Has contact details"
     example:
       name: tunnel-x
       subdomain: tunnelx
@@ -807,7 +810,7 @@ definitions:
         type: number
       operator:
         type: string
-        description: 'Default: `"gte"`< b r >Enum: `"lt"` `"lte"` `"gt"` `"gte"`'
+        description: 'Enum: `"lt"` `"lte"` `"gt"` `"gte"` (Default: `"gte"`)'
     required:
         - value
 
