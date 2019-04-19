@@ -83,7 +83,7 @@ paths:
                 country:
                   id: 148838
 
-  /identification/:
+  /identification:
     x-summary: Search for influencers
     post:
       tags:
@@ -101,25 +101,40 @@ paths:
             $ref: "#/definitions/Search"
       responses:
         200:
-          description: "Create a new token"
+          description: "Search Successful"
           schema:
             $ref: "#/definitions/TokenCreateResponse"
           examples:
             application/json:
-              created_at: 1535365683
-              updated_at: 1536161359
-              id: cc58c9ea-5fa7-466e-91dc-5c08d0b1127c
-              description: ""
-              scopes:
-                buckets: []
-                tunnels:
-                  - foo
-                  - bar
-                  - faa
-              active: true
-              api_disabled: true
-        400:
-          description: ""
+              total: 25575764
+              users:
+                - user_id: "25025320"
+                  name: "Instagram"
+                  username: "instagram"
+                  url: "https://www.instagram.com/instagram/"
+                  picture: "http://img.tensorsocial.com/?https://scontent-frx5-1.cdninstagram.com/t51.2885-19/s320x320/14719833_310540259320655_1605122788543168512_a.jpg"
+                  followers: 293555593
+                  engagement_rate: 0.003065746391689427
+                  match:
+                    extra: {}
+                - user_id: "173560420"
+                  name: "Cristiano Ronaldo"
+                  username: "cristiano"
+                  url: "https://www.instagram.com/cristiano/"
+                  picture: "http://img.tensorsocial.com/?https://scontent-frx5-1.cdninstagram.com/t51.2885-19/s320x320/55837776_379384389454688_4456240822588801024_n.jpg"
+                  followers: 161980125
+                  engagement_rate: 0.031196549576684177
+                  match:
+                    extra: {}
+                - user_id: "7719696"
+                  name: "Ariana Grande"
+                  username: "arianagrande"
+                  url: "https://www.instagram.com/arianagrande/"
+                  picture: "http://img.tensorsocial.com/?https://scontent-atl3-1.cdninstagram.com/t51.2885-19/s320x320/54511215_1099923480217605_7428801122808102912_n.jpg"
+                  followers: 151320982
+                  engagement_rate: 0.012800029278160513
+                  match:
+                    extra: {}
 
   /v1/tunnels/{tunnelID}/:
     x-summary: Get, update and delete tunnels
