@@ -103,7 +103,7 @@ paths:
         200:
           description: "Search Successful"
           schema:
-            $ref: "#/definitions/TokenCreateResponse"
+            $ref: "#/definitions/SearchResponse"
           examples:
             application/json:
               total: 25575764
@@ -874,7 +874,7 @@ definitions:
     required:
       - value
 
-  Search Response:
+  SearchResponse:
     title: Search Response
     type: object
     properties:
