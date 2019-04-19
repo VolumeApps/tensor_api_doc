@@ -30,7 +30,6 @@ tags:
   - name: Identification
     description: Search for influencers according certain filters.
 
-
 x-tagGroups:
   - name: Endpoints
     tags:
@@ -544,13 +543,9 @@ paths:
         404:
           description: "Output or Bucket not found"
 
-
-
 # --------------------------- DEFINITIONS ---------------------------
 
 definitions:
-
-
   location_response:
     title: Locations Response
     type: object
@@ -579,7 +574,6 @@ definitions:
     properties:
       id:
         type: integer
-
 
   Search:
     title: Search Influencers
@@ -646,6 +640,126 @@ definitions:
       name: tunnel-x
       subdomain: tunnelx
       destination: http://localhost:4000
+
+  AudAge:
+    title: Audience Age
+    type: object
+    properties:
+      code:
+        type: string
+      weight:
+        type: number
+
+  AudBrand:
+    title: Audience Brand
+    type: object
+    properties:
+      id:
+        type: integer
+      weight:
+        type: number
+
+  AudGender:
+    title: Audience Gender
+    type: object
+    properties:
+      code:
+        type: integer
+      weight:
+        type: number
+
+  AudGeo:
+    title: Audience Geo
+    type: object
+    properties:
+      id:
+        type: integer
+      weight:
+        type: number
+
+  AudLang:
+    title: Audience Lang
+    type: object
+    properties:
+      code:
+        type: string
+      weight:
+        type: number
+
+  AudRace:
+    title: Audience Race
+    type: object
+    properties:
+      code:
+        type: string
+      weight:
+        type: number
+
+  Engagements:
+    title: Engagements
+    type: object
+    properties:
+      left_number:
+        type: integer
+      right_number:
+        type: integer
+
+  Followers:
+    title: Followers
+    type: object
+    properties:
+      left_number:
+        type: integer
+      right_number:
+        type: integer
+
+  Gender:
+    title: Gender
+    type: object
+    properties:
+      code:
+        type: string
+
+  Age:
+    title: Age
+    type: object
+    properties:
+      left_number:
+        type: string
+      right_number:
+        type: string
+
+  Geo:
+    title: Geo
+    type: object
+    properties:
+      id:
+        type: integer
+
+  Lang:
+    title: Lang
+    type: object
+    properties:
+      code:
+        type: string
+
+  Race:
+    title: Race
+    type: object
+    properties:
+      code:
+        type: string
+
+  EngageRate:
+    title: Engagement Rate
+    type: object
+    properties:
+      value:
+        type: number
+      operator:
+        type: string
+
+
 
 
   # --------------------------- tunnels ---------------------------
