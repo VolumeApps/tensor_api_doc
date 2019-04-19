@@ -32,7 +32,8 @@ tags:
 
 
 x-tagGroups:
-  - tags:
+  - name: Endpoints
+    tags:
       - Account
       - Dictionaries
       - Reports
