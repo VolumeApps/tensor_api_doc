@@ -543,7 +543,7 @@ definitions:
         description: "Search query"
       limit:
         type: integer
-        description: "Limit search results (Default: 10)"
+        description: "Limit search results (Default: `10`)"
       types:
         type: string
         description: "Limit search results to these types -> city, state, or country"
@@ -560,7 +560,7 @@ definitions:
         type: integer
       type:
         type: string
-        description: "Enum: `'city'` `'state'` `'country'` Geo location object type"
+        description: "Enum: `"city"` `"state"` `"country"` Geo location object type"
       name:
         type: string
         description: "Name of geo location"
