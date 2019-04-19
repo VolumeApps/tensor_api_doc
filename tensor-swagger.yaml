@@ -41,12 +41,18 @@ x-tagGroups:
       - Identification
 
 paths:
-  /v1/tunnels:
-    x-summary: List and create tunnels
+  /locations:
+    x-summary: List Locations
     get:
       tags:
-        - "Account"
-      summary: List All Tunnels
+        - "Dictionaries"
+      summary: List geo locations under certain filters.
+      parameters:
+        - name: body
+          in: body
+          required: true
+          schema:
+            $ref: "#/definitions/locations"
       responses:
         200:
           description: Successful Response
@@ -514,8 +520,31 @@ paths:
         404:
           description: "Output or Bucket not found"
 
+
+
+# --------------------------- DEFINITIONS ---------------------------
+
 definitions:
+  locations:
+    title: Locations
+    type: object
+    properties:
+      search:
+        type: string
+        description: "Search query"
+      limit:
+        type: integer
+        description: "Default: 10 Limit search results"
+      types:
+        type: string
+        description: "Limit search results to these types -> city, state, or country"
+
+
+
+
+
   # --------------------------- tunnels ---------------------------
+
   Tunnel:
     title: Tunnel
     type: object
