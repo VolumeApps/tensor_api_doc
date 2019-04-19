@@ -33,12 +33,12 @@ tags:
       "Inputs are your public endpoints. Each input serves as an inbox that you can supply to your webhooks producer (ie: Github, Docker, IFTTT)"
 
 x-tagGroups:
-  tags:
-    - Account
-    - Dictionaries
-    - Reports
-    - Identification
-
+  - name: Endpoints
+    tags:
+      - Account
+      - Dictionaries
+      - Reports
+      - Identification
 
 paths:
   /v1/tunnels:
