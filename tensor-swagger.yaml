@@ -11,7 +11,8 @@ info:
 
     # Rate Limit
     We are limiting one IP to 10 requests per seconds. If you are sending more requests you will receieve a 429 response status code.
-
+  contact:
+    email: "hello@tensorsocial.com"
 host: api.tensorsocial.com
 basePath: /
 schemes:
