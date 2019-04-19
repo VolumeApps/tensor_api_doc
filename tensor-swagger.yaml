@@ -611,8 +611,12 @@ definitions:
         $ref: "#/definitions/AudRace"
       brand:
         type: array
+        items:
+          type: integer
       brand_category:
         type: array
+        items:
+          type: integer
       engagements:
         type: object
         $ref: "#/definitions/Engagements"
@@ -684,13 +688,14 @@ definitions:
 
   AudGeo:
     title: Audience Geo
-    type: object
-    properties:
-      id:
-        type: integer
-        required: true
-      weight:
-        type: number
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+          required: true
+        weight:
+          type: number
 
   AudLang:
     title: Audience Lang
@@ -748,10 +753,11 @@ definitions:
 
   Geo:
     title: Geo
-    type: object
-    properties:
-      id:
-        type: integer
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
 
   Lang:
     title: Lang
