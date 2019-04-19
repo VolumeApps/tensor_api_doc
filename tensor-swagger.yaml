@@ -83,6 +83,29 @@ paths:
                 country:
                   id: 148838
 
+  /languages:
+    x-summary: List Languages
+    get:
+      tags:
+        - "Dictionaries"
+      summary: List Languages
+      responses:
+        200:
+          description: Successful
+          schema:
+            items:
+              $ref: "#/definitions/language_response"
+          examples:
+            application/json:
+              status: true
+              data:
+                - code: "en"
+                  name: "English"
+                  count: 61255031
+                - code: "es"
+                  name: "Spanish"
+                  count: 39990809
+
   /identification:
     x-summary: Search for influencers
     post:
@@ -589,6 +612,29 @@ definitions:
     properties:
       id:
         type: integer
+
+  language_response:
+    title: Languages Response
+    type: object
+    properties:
+      success:
+        type: boolean
+      data:
+        type: array
+        $ref: "#/definitions/LanguageObject"
+
+  LanguageObject:
+    title: Language Data
+    items:
+      type: object
+      properties:
+        code:
+          type: string
+        name:
+          type: string
+        count:
+          type: integer
+          description: "Frequency of influencers related to this language"
 
   Search:
     title: Search Influencers
