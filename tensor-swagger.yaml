@@ -91,13 +91,17 @@ paths:
         - "Identification"
       summary: Search for influencers
       parameters:
+        - in: query
+          name: api_token
+          type: string
+          description: Your api_token is required for this request
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/TokenRequest"
+            $ref: "#/definitions/Search"
       responses:
-        201:
+        200:
           description: "Create a new token"
           schema:
             $ref: "#/definitions/TokenCreateResponse"
@@ -555,6 +559,7 @@ definitions:
         type: integer
       type:
         type: string
+        description: "Enum: `city` `state` `country` Geo location object type"
       name:
         type: string
         description: "Name of geo location"
@@ -574,6 +579,73 @@ definitions:
     properties:
       id:
         type: integer
+
+
+  Search:
+    title: Search Influencers
+    type: object
+    properties:
+      audience_age:
+        type: array
+        $ref: "#/definitions/AudAge"
+      audience_brand:
+        type: array
+        $ref: "#/definitions/AudBrand"
+      audience_brand_category:
+        type: array
+        $ref: "#/definitions/AudBrand"
+      audience_gender:
+        type: object
+        $ref: "#/definitions/AudGender"
+      audience_geo:
+        type: array
+        $ref: "#/definitions/AudGeo"
+      audience_lang:
+        type: object
+        $ref: "#/definitions/AudLang"
+      audience_race:
+        type: object
+        $ref: "#/definitions/AudRace"
+      brand:
+        type: array
+      brand_category:
+        type: array
+      engagements:
+        type: object
+        $ref: "#/definitions/Engagements"
+      followers:
+        type: object
+        $ref: "#/definitions/Followers"
+      gender:
+        type: object
+        $ref: "#/definitions/Gender"
+      age:
+        type: object
+        $ref: "#/definitions/Age"
+      geo:
+        type: array
+        $ref: "#/definitions/Geo"
+      lang:
+        type: object
+        $ref: "#/definitions/Lang"
+      race:
+        type: object
+        $ref: "#/definitions/Race"
+      text:
+        type: string
+      engagement_rate:
+        type: object
+        $ref: "#/definitions/EngageRate"
+      is_business:
+        type: boolean
+      has_ads:
+        type: boolean
+      has_email:
+        type: boolean
+    example:
+      name: tunnel-x
+      subdomain: tunnelx
+      destination: http://localhost:4000
 
 
   # --------------------------- tunnels ---------------------------
