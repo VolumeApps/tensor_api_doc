@@ -65,14 +65,18 @@ paths:
                 type: ["city"]
                 name: "Chicago"
                 title: "Chicago, Illinois, United States"
-                state: "id: 122586"
-                country: "id: 148838"
+                state:
+                  id: 122586
+                country:
+                  id: 148838
               - id: 127190
                 type: ["city"]
                 name: "East Chicago"
                 title: "East Chicago, Indiana, United States"
-                state: [ id: 161816 ]
-                country: [ id: 148838 ]
+                state:
+                  id: 161816
+                country:
+                  id: 148838
     post:
       tags:
         - "Tunnels"
@@ -565,47 +569,6 @@ definitions:
         description: "Name of geo location with country name, e.g. 'Paris, France'"
       state:
         type: object
-
-
-      name:
-        type: string
-      group:
-        type: string
-      host:
-        type: string
-      protocol:
-        type: string
-      description:
-        type: string
-      auth:
-        type: object
-        $ref: "#/definitions/TunnelAuth"
-      crypto:
-        type: string
-    example:
-      created_at: 1534409264
-      updated_at: 1534409264
-      id: b3237483-e96e-4f3a-905c-0d9603d66c1f
-      destination: http://localhost:8090
-      name: tunnel
-      group: ""
-      addr: ""
-      host: tunnelx.webrelay.io
-      mode: active
-      protocol: http
-      account_id: bd7e1dfc-54c8-408c-a885-7498bf1d8522
-      description: ""
-      features:
-      auth:
-        created_at: 1534409264
-        updated_at: 1534409264
-        id: eb3fbc49-0713-48b1-8971-a7c4a9c64dfb
-        type: none
-      agent_id: ""
-      ingress_rules:
-      crypto: "off"
-
-
 
 
   # --------------------------- tunnels ---------------------------
