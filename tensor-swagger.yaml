@@ -598,7 +598,6 @@ definitions:
         type: object
         $ref: "#/definitions/Filters"
 
-
   Filters:
     title: Filters
     type: object
@@ -671,59 +670,55 @@ definitions:
         type: boolean
         description: "Has contact details"
     example:
-      search:
-        audience_age:
-          - code: "18-24"
-            weight: 0.01
-        audience_brand:
-          - id: 0
-            weight: 0.05
-        audience_brand_category:
-          - id: 0
-            weight: 0.05
-        audience_gender:
-          code: "MALE"
+      audience_age:
+        - code: "18-24"
+          weight: 0.01
+      audience_brand:
+        - id: 0
           weight: 0.05
-        audience_geo:
-          - id: 0
-            weight: 0.05
-        audience_lang:
-          code: "en"
-          weight: 0.2
-        audience_race:
-          code: "Black"
-          weight: 0.3
-        brand:
-          - 0
-        brand_category:
-          - 0
-        engagements:
-          left_number: 1000
-          right_number: 200000
-        followers:
-          left_number: 500000
-          right_number: 1000000
-        gender:
-          code: "MALE"
-        age:
-          left_number: "18"
-          right_number: "35"
-        geo:
-          - id: 0
-        lang:
-          code: "es"
-        race:
-          code: "White"
-        text: "twitch"
-        engagement_rate:
-          value: 0
-          operator: "gte"
-        is_business: true
-        has_ads: true
-        has_email: true
-
-
-
+      audience_brand_category:
+        - id: 0
+          weight: 0.05
+      audience_gender:
+        code: "MALE"
+        weight: 0.05
+      audience_geo:
+        - id: 0
+          weight: 0.05
+      audience_lang:
+        code: "en"
+        weight: 0.2
+      audience_race:
+        code: "Black"
+        weight: 0.3
+      brand:
+        - 0
+      brand_category:
+        - 0
+      engagements:
+        left_number: 1000
+        right_number: 200000
+      followers:
+        left_number: 500000
+        right_number: 1000000
+      gender:
+        code: "MALE"
+      age:
+        left_number: "18"
+        right_number: "35"
+      geo:
+        - id: 0
+      lang:
+        code: "es"
+      race:
+        code: "White"
+      text: "twitch"
+      engagement_rate:
+        value: 0
+        operator: "gte"
+      is_business: true
+      has_ads: true
+      has_email: true
 
   AudAge:
     title: Audience Age
@@ -735,7 +730,7 @@ definitions:
           description: 'Enum: `"18-24"` `"25-34"` `"35-44"` `"45-64"` `"65-"`'
         weight:
           type: number
-          description: 'Default `0.01`'
+          description: "Default `0.01`"
       required:
         - code
 
@@ -748,7 +743,7 @@ definitions:
           type: integer
         weight:
           type: number
-          description: 'Default `0.05`'
+          description: "Default `0.05`"
       required:
         - id
 
@@ -761,9 +756,9 @@ definitions:
         description: 'Enum: `"MALE"` `"FEMALE"`'
       weight:
         type: number
-        description: 'Default `0.05`'
+        description: "Default `0.05`"
     required:
-        - code
+      - code
 
   AudGeo:
     title: Audience Geo
@@ -775,7 +770,7 @@ definitions:
           description: "You can get a valid id from location dictionary"
         weight:
           type: number
-          description: 'Default `0.05`'
+          description: "Default `0.05`"
       required:
         - id
 
@@ -788,9 +783,9 @@ definitions:
         description: "You can get a valid language code from our dictionary"
       weight:
         type: number
-        description: 'Default `0.2`'
+        description: "Default `0.2`"
     required:
-        - code
+      - code
 
   AudRace:
     title: Audience Race
@@ -801,9 +796,9 @@ definitions:
         description: 'Enum: `"Black"` `"Asian"` `"White"` `"Hispanic"`'
       weight:
         type: number
-        description: 'Default `0.3`'
+        description: "Default `0.3`"
     required:
-        - code
+      - code
 
   Engagements:
     title: Engagements
@@ -877,7 +872,7 @@ definitions:
         type: string
         description: 'Enum: `"lt"` `"lte"` `"gt"` `"gte"`   (Default: `"gte"`)'
     required:
-        - value
+      - value
 
   Search Response:
     title: Search Response
@@ -909,8 +904,6 @@ definitions:
               properties:
                 extra:
                   type: object
-
-
 
   # --------------------------- tunnels ---------------------------
 
