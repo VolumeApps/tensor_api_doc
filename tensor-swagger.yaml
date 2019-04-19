@@ -55,7 +55,7 @@ paths:
             $ref: "#/definitions/location_query"
       responses:
         200:
-          description: Successful Response
+          description: Successful
           schema:
             items:
               $ref: "#/definitions/location_response"
@@ -65,8 +65,8 @@ paths:
                 type: ["city"]
                 name: "Chicago"
                 title: "Chicago, Illinois, United States"
-                state: [ id: 122586 ]
-                country: [ id: 148838 ]
+                state: "id: 122586"
+                country: "id: 148838"
               - id: 127190
                 type: ["city"]
                 name: "East Chicago"
@@ -553,13 +553,20 @@ definitions:
     type: object
     properties:
       id:
-        type: string
-      created_at:
         type: integer
-      updated_at:
-        type: integer
-      destination:
+      type:
         type: string
+        description: "Enum: `'city'` `'state'` `'country'` Geo location object type"
+      name:
+        type: string
+        description: "Name of geo location"
+      title:
+        type: string
+        description: "Name of geo location with country name, e.g. 'Paris, France'"
+      state:
+        type: object
+
+
       name:
         type: string
       group:
