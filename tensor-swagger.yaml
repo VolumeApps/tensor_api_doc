@@ -28,7 +28,7 @@ tags:
   - name: Reports
     description: Creates new audience data report both for likers and followers at the same time. We recommend to use user's Instagram id rather than username wherever possible, as Influencers often change their usernames. User IDs are constant for a given user, and so storing and making lookups by the Instagram user ID will help avoid unexpected behaviour.
   - name: Identification
-    description: Search for influencers according certain filters.
+    description: Search for influencers according to filters.
 
 x-tagGroups:
   - name: Endpoints
