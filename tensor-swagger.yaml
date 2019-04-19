@@ -569,6 +569,17 @@ definitions:
         description: "Name of geo location with country name, e.g. 'Paris, France'"
       state:
         type: object
+        $ref: "#/definitions/locationObject"
+      country:
+        type: object
+        $ref: "#/definitions/locationObject"
+
+  locationObject:
+    title: Location Object
+    type: object
+    properties:
+      id:
+        type: integer
 
 
   # --------------------------- tunnels ---------------------------
