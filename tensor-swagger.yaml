@@ -45,6 +45,7 @@ paths:
       tags:
         - "Dictionaries"
       summary: List Locations
+      description: List geo locations under certain filters.
       parameters:
         - in: query
           name: search
@@ -88,6 +89,7 @@ paths:
       tags:
         - "Dictionaries"
       summary: List Languages
+      description: "List all supported languages ordered by descend of their frequency. They can be used as filter in Search or may be returned in Audience Data report. We recommend that you cache this dictionary because it updates rarely."
       responses:
         200:
           description: Successful
