@@ -27,7 +27,7 @@ tags:
   - name: Account
     description: You can check how much credits are left using the account/info endpoint.
   - name: Reports
-    description: Creates new audience data report. Both for likers and followers at the same time. We strongly recommend to use user's userId rather than username or link wherever possible, as Influencers often change their usernames. User IDs, on the other hand, are constant for a given user, and so storing and making lookups by user ID will help avoid unexpected behaviour.
+    description: Creates new audience data report both for likers and followers at the same time. We recommend to use user's Instagram id rather than username wherever possible, as Influencers often change their usernames. User IDs are constant for a given user, and so storing and making lookups by the Instagram user ID will help avoid unexpected behaviour.
   - name: Identification
     description: Search for influencers according certain filters.
 
@@ -48,8 +48,8 @@ paths:
         - "Dictionaries"
       summary: List Locations
       parameters:
-        - name: body
-          in: body
+        - name: query
+          in: query
           required: true
           schema:
             $ref: "#/definitions/location_query"
@@ -77,36 +77,41 @@ paths:
                   id: 161816
                 country:
                   id: 148838
+
+  /identification/:
+    x-summary: Search for influencers
     post:
       tags:
-        - "Tunnels"
-      description: >-
-        You may create your own tunnel using this action. It takes a JSON
-        object containing a tunnel request with a specified destination. Paid plans
-        have an option to specify either encryption, subdomain or full domain.
-      summary: Create a New Tunnel
+        - "Identification"
+      summary: Search for influencers
       parameters:
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/TunnelCreateRequest"
+            $ref: "#/definitions/TokenRequest"
       responses:
         201:
-          description: ""
+          description: "Create a new token"
           schema:
-            $ref: "#/definitions/Tunnel"
+            $ref: "#/definitions/TokenCreateResponse"
           examples:
-            description: "Create a tunnel with a custom subdomain"
             application/json:
-              id: b3237483-e96e-4f3a-905c-0d9603d66c1f
-              created_at: 1534409264
-              updated_at: 1534409264
-              name: "tunnel-x"
-              destination: "http://localhost:4000"
-              host: "tunnelx.webrelay.io"
+              created_at: 1535365683
+              updated_at: 1536161359
+              id: cc58c9ea-5fa7-466e-91dc-5c08d0b1127c
+              description: ""
+              scopes:
+                buckets: []
+                tunnels:
+                  - foo
+                  - bar
+                  - faa
+              active: true
+              api_disabled: true
         400:
-          description: "Invalid tunnel request supplied"
+          description: ""
+
   /v1/tunnels/{tunnelID}/:
     x-summary: Get, update and delete tunnels
     parameters:
