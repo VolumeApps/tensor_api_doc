@@ -3,7 +3,7 @@ info:
   version: "1.0"
   title: "Tensor Social API"
   x-logo:
-      url: http://tensorsocial.com/src/images/logo.svg
+      url: TensorLogo.svg
       backgroundColor: #FFFFFF
       altText: Tensor Social logo
   description: |
@@ -85,7 +85,7 @@ paths:
         - in: query
           name: types
           type: string
-          description: 'Limit search results to these types -> `"city"` `"state"` or `"country"'
+          description: 'Limit search results to these types -> `"city"` `"state"` or `"country"`'
       responses:
         200:
           description: Successful
