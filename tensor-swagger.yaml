@@ -3,7 +3,7 @@ info:
   version: "1.0"
   title: "Tensor Social API"
   x-logo:
-      url: https://rebilly.github.io/ReDoc/petstore-logo.png
+      url: http://tensorsocial.com/src/images/logo.svg
       backgroundColor: #FFFFFF
       altText: Tensor Social logo
   description: |
