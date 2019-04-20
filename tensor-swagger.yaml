@@ -58,15 +58,9 @@ paths:
                 interests:
                   - id: 1
                     name: "Television & Film"
-                    count: 68765028
-                    deprecated: false
                 brands:
                   - id: 2
                     name: "20th Century Fox"
-                    interest:
-                      - id: 1
-                    count: 380893
-                    deprecated: false
 
   /locations:
     x-summary: List Locations
@@ -87,7 +81,7 @@ paths:
         - in: query
           name: types
           type: string
-          description: "Limit search results to these types -> city, state, or country"
+          description: 'Limit search results to these types -> `"city"` `"state"` or `"country"'
       responses:
         200:
           description: Successful
@@ -130,10 +124,8 @@ paths:
               data:
                 - code: "en"
                   name: "English"
-                  count: 61255031
                 - code: "es"
                   name: "Spanish"
-                  count: 39990809
 
   /identification:
     x-summary: Search for influencers
@@ -215,10 +207,6 @@ definitions:
               type: integer
             name:
               type: string
-            count:
-              type: integer
-            deprecated:
-              type: boolean
       brands:
         type: array
         items:
@@ -228,17 +216,6 @@ definitions:
               type: integer
             name:
               type: string
-            interest:
-              type: array
-              items:
-                type: object
-                properties:
-                  id:
-                    type: integer
-            count:
-              type: integer
-            deprecated:
-              type: boolean
 
   location_response:
     title: Locations Response
@@ -288,9 +265,6 @@ definitions:
           type: string
         name:
           type: string
-        count:
-          type: integer
-          description: "Frequency of influencers related to this language"
 
   Search:
     title: Search Influencers
