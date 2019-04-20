@@ -2,6 +2,10 @@ swagger: "2.0"
 info:
   version: "1.0"
   title: "Tensor Social API"
+  x-logo:
+      url: https://rebilly.github.io/ReDoc/petstore-logo.png
+      backgroundColor: #FFFFFF
+      altText: Tensor Social logo
   description: |
     # Introduction
     The Tensor Social API provides access to the audience demographic and psychographic attributes of Instagram users based on their active audience and social media presence. We currently support user lookups by user ID or username for Instagram.
