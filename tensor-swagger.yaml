@@ -43,7 +43,7 @@ x-tagGroups:
       - Identification
 
 paths:
-  /brands:
+  /brands/:
     x-summary: List Brands & Interests
     get:
       tags:
@@ -66,7 +66,7 @@ paths:
                   - id: 2
                     name: "20th Century Fox"
 
-  /locations:
+  /locations/:
     x-summary: List Locations
     get:
       tags:
@@ -110,7 +110,7 @@ paths:
                 country:
                   id: 148838
 
-  /languages:
+  /languages/:
     x-summary: List Languages
     get:
       tags:
@@ -131,6 +131,60 @@ paths:
                 - code: "es"
                   name: "Spanish"
 
+  /reports/{report_id}/:
+    x-summary: Fetch Report
+    get:
+      tags:
+        - "Reports"
+      summary: Fetch Report
+      description: "Fetch previously generated report. We are storing old reports for 30 days."
+      parameters:
+        - in: path
+          name: report_id
+          required: true
+          type: string
+        - in: query
+          name: api_token
+          required: true
+          type: string
+          description: Your api_token is required for this request
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/SampleReport"
+          examples:
+            application/json:
+              total: 25575764
+              users:
+                - user_id: "25025320"
+                  name: "Instagram"
+                  username: "instagram"
+                  url: "https://www.instagram.com/instagram/"
+                  picture: "http://img.tensorsocial.com/?https://scontent-frx5-1.cdninstagram.com/t51.2885-19/s320x320/14719833_310540259320655_1605122788543168512_a.jpg"
+                  followers: 293555593
+                  engagement_rate: 0.003065746391689427
+                  match:
+                    extra: {}
+                - user_id: "173560420"
+                  name: "Cristiano Ronaldo"
+                  username: "cristiano"
+                  url: "https://www.instagram.com/cristiano/"
+                  picture: "http://img.tensorsocial.com/?https://scontent-frx5-1.cdninstagram.com/t51.2885-19/s320x320/55837776_379384389454688_4456240822588801024_n.jpg"
+                  followers: 161980125
+                  engagement_rate: 0.031196549576684177
+                  match:
+                    extra: {}
+                - user_id: "7719696"
+                  name: "Ariana Grande"
+                  username: "arianagrande"
+                  url: "https://www.instagram.com/arianagrande/"
+                  picture: "http://img.tensorsocial.com/?https://scontent-atl3-1.cdninstagram.com/t51.2885-19/s320x320/54511215_1099923480217605_7428801122808102912_n.jpg"
+                  followers: 151320982
+                  engagement_rate: 0.012800029278160513
+                  match:
+                    extra: {}
+
   /identification:
     x-summary: Search for influencers
     post:
@@ -140,6 +194,7 @@ paths:
       parameters:
         - in: query
           name: api_token
+          required: true
           type: string
           description: Your api_token is required for this request
         - name: body
@@ -269,6 +324,439 @@ definitions:
           type: string
         name:
           type: string
+
+  SampleReport:
+    type: object
+    properties:
+      success:
+        title: "Success"
+        type: boolean
+      version:
+        title: "Version"
+        type: string
+      report_info:
+        $ref: "#/definitions/ReportInfo"
+      user_profile:
+        $ref: "#/definitions/UserProfile"
+      audience_likers:
+        $ref: "#/definitions/AudienceLikers"
+      audience_followers:
+        $ref: "#/definitions/AudienceFollowers"
+
+  ReportInfo:
+    title: "Report info"
+    type: object
+    properties:
+      report_id:
+        title: "Report id"
+        type: string
+        minLength: 1
+      created:
+        title: "Created"
+        type: string
+        format: date-time
+
+  UserProfile:
+    title: "User profile"
+    type: object
+    properties:
+      user_id:
+        title: "User id"
+        type: string
+      username:
+        title: "Username"
+        type: string
+      url:
+        title: "Url"
+        type: string
+      picture:
+        title: "Picture"
+        type: string
+      fullname:
+        title: "Fullname"
+        type: string
+      is_verified:
+        title: "Is verified"
+        type: boolean
+      is_business:
+        title: "Is business"
+        type: boolean
+      gender:
+        title: "Gender"
+        type: string
+        enum: ["MALE", "FEMALE"]
+      age_group:
+        title: "Age group"
+        type: string
+      language:
+        title: "Language"
+        type: string
+      followers:
+        title: "Followers"
+        type: integer
+      engagements:
+        title: "Engagements"
+        type: integer
+      engagement_rate:
+        title: "Engagement rate"
+        type: number
+      avg_likes:
+        title: "Avg likes"
+        type: integer
+      avg_comments:
+        title: "Avg comments"
+        type: integer
+      avg_views:
+        title: "Avg views"
+        type: integer
+      stat_history:
+        type: array,
+        items:
+          $ref: "#/definitions/MonthlyStat"
+      paid_post_perfomance:
+        title: "Paid post perfomance"
+        type: number
+      geo:
+        $ref: "#/definitions/Geo"
+      contacts:
+        type: array,
+        items:
+          $ref: "#/definitions/Contact"
+      top_hashtags:
+        type: array
+        items:
+          $ref: "#/definitions/Tag"
+      top_mentions:
+        type: array
+        items:
+          $ref: "#/definitions/Tag"
+      brand_affinity:
+        type: array
+        items:
+          $ref: "#/definitions/Brand"
+      interests:
+        type: array,
+        items:
+          $ref: "#/definitions/Interest"
+      relevant_tags:
+        type: array,
+        items:
+          $ref: "#/definitions/RelevantTag"
+      similar_users:
+        type: array,
+        items:
+          $ref: "#/definitions/ScoredUser"
+      top_posts:
+        type: array
+        items:
+          $ref: "#/definitions/Post"
+      commercial_posts:
+        type: array
+        items:
+          $ref: "#/definitions/Post"
+      recent_posts:
+        type: array
+        items:
+          $ref: "#/definitions/PostWithoutImage"
+
+  MonthlyStat:
+    type: object
+    properties:
+      month:
+        title: "Month"
+        type: string
+      followers:
+        title: "Followers"
+        type: integer
+      avg_likes:
+        title: "Avg likes"
+        type: integer
+
+  Geo:
+    title: "Geo"
+    type: object
+    properties:
+      city:
+        $ref: "#/definitions/GeoCity"
+      state:
+        $ref: "#/definitions/GeoState"
+      country:
+        $ref: "#/definitions/GeoCountry"
+
+  GeoCity:
+    title: "City"
+    type: object
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      coords:
+        $ref: "#/definitions/Coords"
+
+  GeoState:
+    title: "State"
+    type: object
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      coords:
+        $ref: "#/definitions/Coords"
+
+  GeoCountry:
+    title: "Country"
+    type: object
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      coords:
+        $ref: "#/definitions/Coords"
+      code:
+        title: "Code"
+        type: string
+
+  Coords:
+    title: "Coords"
+    type": object
+    properties:
+      lat:
+        title: "Lat"
+        type: number
+      lon:
+        title: "Lon"
+        type: number
+
+  Contact:
+    type: object
+    properties:
+      type:
+        title: "Type"
+        type": string
+        enum: [ youtube, snapchat, facebook, whatsapp, sayat, sarahah, vk, twitter, email, phone, viber, telegram, bbm, lineid, kik, wechat, skype, tiktok ]
+      value:
+        title: "Value"
+        type: string
+
+  Tag:
+    type: object
+    properties:
+      tag:
+        title: "Tag"
+        type: string
+        weight:
+          title: "Weight"
+          type: number
+
+  Brand:
+    type: object
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      interest:
+        type: array
+        items:
+          $ref: "#/definitions/Interest"
+
+  Interest:
+    type: object
+    properties:
+      id:
+        title: "Id"
+        type: integer,
+      name:
+        title: "Name"
+        type: string
+
+  RelevantTag:
+    type: object
+    properties:
+      tag:
+        title: "Tag"
+        type: string
+      distance:
+        title: "Distance"
+        type: number
+      freq:
+        title: "Freq"
+        type: number
+      tag_cnt:
+        title: "Tag cnt"
+        type: integer
+
+  ScoredUser:
+    type: object,
+    properties:
+      user_id:
+        title: "User id"
+        type: string
+      username:
+        title: "Username"
+        type: string
+      picture:
+        title: "Picture"
+        type: string
+      followers:
+        title: "Followers"
+        type: integer
+      fullname:
+        title: "Fullname"
+        type: string
+      url:
+        title: "Url"
+        type: string
+      geo:
+        $ref: "#/definitions/Geo"
+      engagements:
+        title: "Engagements"
+        type: integer
+      avg_likes:
+        title: "Avg likes"
+        type: integer
+      avg_comments:
+        title: "Avg comments"
+        type: integer
+      avg_views:
+        title: "Avg views"
+        type: integer
+      score:
+        title: "Score"
+        type: number
+
+  Post:
+    type: object,
+    properties:
+      user_id:
+        title: "User id"
+        type: string
+      username:
+        title: "Username"
+        type: string
+      user_picture:
+        title: "User picture"
+        type: string
+      user_url:
+        title: "User url"
+        type: string
+      type:
+        title: "Type"
+        type: string
+      post_id:
+        title: "Post id"
+        type: string
+      created:
+        title: "Created"
+        type: string,
+        format: date-time
+      text:
+        title: "Text"
+        type: string
+      link:
+        title: "Link"
+        type: string
+      mentions:
+        type: array,
+        items:
+          type: string
+      hashtags:
+        type: array
+        items:
+          type: string
+      stat:
+        $ref: "#/definitions/PostStat"
+      sponsor:
+        $ref: "#/definitions/Sponsor"
+      image:
+        title: "Image"
+        type: string
+      video:
+        title: "Video"
+        type: string
+      thumbnail:
+        title: "Thumbnail"
+        type: string
+
+  PostStat:
+    title: "Stat"
+    type: object
+    properties:
+      likes:
+        title: "Likes"
+        type: integer
+      comments:
+        title: "Comments"
+        type: integer
+      views:
+        title: "Views"
+        type: integer
+
+  Sponsor:
+    title: "Sponsor"
+    type: object
+    properties:
+      user_id:
+        title: "User id"
+        type: string
+      username:
+        title: "Username"
+        type: string
+
+  PostWithoutImage:
+    type: object
+    properties:
+      user_id:
+        title: "User id"
+        type: string
+      username:
+        title: "Username"
+        type: string
+      user_picture:
+        title: "User picture"
+        type: string
+      user_url:
+        title: "User url"
+        type: string
+      type:
+        title: "Type"
+        type: string
+      post_id:
+        title: "Post id"
+        type: string
+      created:
+        title: "Created"
+        type: string
+        format: date-time
+      text:
+        title: "Text"
+        type: string
+      link:
+        title: "Link"
+        type: string
+      mentions:
+        type: array
+        items:
+          type: string
+      hashtags:
+        type: array
+        items:
+          type: string
+      stat:
+        $ref: "#/definitions/PostStat"
+      sponsor:
+        $ref: "#/definitions/Sponsor"
 
   Search:
     title: Search Influencers
