@@ -490,17 +490,16 @@ definitions:
         type: number
       credibility_class:
         title: "Credibility class"
-        description: "Only in Audience Data report, there are no class in Post Analytics."
         type: string
         enum: ["bad", "low", "normal", "high", "best"]
       audience_genders:
         type: array
         items:
-          $ref: "#/definitions/AudGender"
+          $ref: "#/definitions/AudienceGender"
       audience_ages:
         type: array
         items:
-          $ref: "#/definitions/AudAge"
+          $ref: "#/definitions/AudienceAge"
       audience_genders_per_age:
         type: array
         items:
@@ -569,11 +568,11 @@ definitions:
       audience_genders:
         type: array
         items:
-          $ref: "#/definitions/AudGender"
+          $ref: "#/definitions/AudienceGender"
       audience_ages:
         type: array
         items:
-          $ref: "#/definitions/AudAge"
+          $ref: "#/definitions/AudienceAge"
       audience_genders_per_age:
         type: array
         items:
@@ -1100,6 +1099,17 @@ definitions:
       required:
         - code
 
+  AudienceAge:
+    type: object
+    properties:
+      code:
+        title: "Code"
+        type: string
+        enum: ["13-17", "18-24", "25-34", "35-44", "45-64", "65-"]
+      weight:
+        title: "Weight"
+        type: number
+
   AudienceGenderPerAge:
     type: object
     properties:
@@ -1143,10 +1153,6 @@ definitions:
       weight:
         title: "Weight"
         type: number
-      affinity:
-        title: "Affinity"
-        description: "Measure of how volume of influencer's audience interested in specific brand relates to average on Instagram. 1.0 means the same as on average, 2.0 means 2 times more than usual on Instagram."
-        type: number
 
   AudienceInterest:
     type: object
@@ -1173,6 +1179,17 @@ definitions:
         description: "Default `0.05`"
     required:
       - code
+
+  AudienceGender:
+    type: object
+    properties:
+      code:
+        title: "Code"
+        type: string
+        enum: ["MALE", "FEMALE"]
+      weight:
+        title: "Weight"
+        type: number
 
   AudGeo:
     title: Audience Geo
