@@ -3,9 +3,9 @@ info:
   version: "1.0"
   title: "Tensor Social API"
   x-logo:
-      url: "http://tensorsocial.com/src/images/TensorLogo.svg"
-      backgroundColor: #FFFFFF
-      altText: Tensor Social logo
+    url: "http://tensorsocial.com/src/images/TensorLogo.svg"
+    backgroundColor: #FFFFFF
+    altText: Tensor Social logo
   description: |
     # Introduction
     The Tensor Social API provides access to the audience demographic and psychographic attributes of Instagram users based on their active audience and social media presence. We currently support user lookups by user ID or username for Instagram.
@@ -239,7 +239,6 @@ paths:
                   match:
                     extra: {}
 
-
 # --------------------------- DEFINITIONS ---------------------------
 
 definitions:
@@ -248,7 +247,7 @@ definitions:
     type: object
     properties:
       success:
-          type: boolean
+        type: boolean
       data:
         type: object
         $ref: "#/definitions/BrandsData"
@@ -459,6 +458,149 @@ definitions:
         items:
           $ref: "#/definitions/PostWithoutImage"
 
+  AudienceLikers:
+    title: "Audience likers"
+    type: object,
+    properties:
+      success:
+        title: "Success"
+        description: "Set to false in case of there are no specific report"
+        type: boolean
+      error:
+        title: "Error"
+        description: "Code for reason of lack of report. Only if success=false"
+        type: string,
+        enum: ["empty_audience"]
+      error_message:
+        title: "Error message"
+        description: "Details for reason of lack of report. Only if success=false"
+        type: string
+      data:
+        $ref: "#/definitions/AudienceDataLikers"
+
+  AudienceDataLikers:
+    title: "Data"
+    type: object,
+    properties:
+      notable_users_ratio:
+        title: "Notable users ratio"
+        type: number
+      audience_credibility:
+        title: "Audience credibility"
+        type: number
+      credibility_class:
+        title: "Credibility class"
+        description: "Only in Audience Data report, there are no class in Post Analytics."
+        type: string,
+        enum: ["bad", "low", "normal", "high", "best"]
+      audience_genders:
+        type: array
+        items:
+          $ref: "#/definitions/AudGender"
+      audience_ages:
+        type: array
+        items:
+          $ref: "#/definitions/AudAge"
+      audience_genders_per_age:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceGenderPerAge"
+      audience_ethnicities:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceEthnicity"
+      audience_brand_affinity:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceBrand"
+      audience_interests:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceInterest"
+      audience_geo:
+        $ref: "#/definitions/AudienceGeo"
+      audience_lookalikes:
+        type: array
+        items:
+          $ref: "#/definitions/ScoredUser"
+      notable_users:
+        type: array
+        items:
+          $ref: "#/definitions/User"
+      likes_not_from_followers:
+        title: "Likes not from followers"
+        type: number
+
+  AudienceFollowers:
+    title: "Audience followers"
+    type: object
+    properties:
+      success:
+        title: "Success"
+        description: "Set to false in case of there are no specific report"
+        type: boolean
+      error:
+        title: "Error"
+        description: "Code for reason of lack of report. Only if success=false"
+        type: string
+        enum": ["empty_audience"]
+      error_message:
+        title: "Error message"
+        description: "Details for reason of lack of report. Only if success=false"
+        type: string
+      data:
+        $ref: "#/definitions/AudienceData"
+
+  AudienceData:
+    title: "Data"
+    type: object
+    properties:
+      notable_users_ratio:
+        title: "Notable users ratio"
+        type: number
+      audience_credibility:
+        title: "Audience credibility"
+        type: number
+      credibility_class:
+        title: "Credibility class"
+        description: "Only in Audience DAta report, there are no class in Post Analytics."
+        type: string
+        enum: ["bad", "low", "normal", "high", "best"]
+      audience_genders:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceGender"
+      audience_ages:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceAge"
+      audience_genders_per_age:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceGenderPerAge"
+      audience_ethnicities:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceEthnicity"
+      audience_brand_affinity:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceBrand"
+      audience_interests:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceInterest"
+      audience_geo:
+        $ref: "#/definitions/AudienceGeo"
+      audience_lookalikes:
+        type: array
+        items:
+          $ref: "#/definitions/ScoredUser"
+      notable_users:
+        type: array
+        items:
+          $ref: "#/definitions/User"
+
   MonthlyStat:
     type: object
     properties:
@@ -542,7 +684,27 @@ definitions:
       type:
         title: "Type"
         type": string
-        enum: [ youtube, snapchat, facebook, whatsapp, sayat, sarahah, vk, twitter, email, phone, viber, telegram, bbm, lineid, kik, wechat, skype, tiktok ]
+        enum:
+          [
+            youtube,
+            snapchat,
+            facebook,
+            whatsapp,
+            sayat,
+            sarahah,
+            vk,
+            twitter,
+            email,
+            phone,
+            viber,
+            telegram,
+            bbm,
+            lineid,
+            kik,
+            wechat,
+            skype,
+            tiktok,
+          ]
       value:
         title: "Value"
         type: string
@@ -635,6 +797,42 @@ definitions:
       score:
         title: "Score"
         type: number
+
+  User:
+    type: object
+    properties:
+      user_id:
+        title": "User id"
+        type: string
+      username:
+        title: "Username"
+        type: string
+      picture:
+        title: "Picture"
+        type: string
+      followers:
+        title: "Followers"
+        type: integer
+      fullname:
+        title: "Fullname"
+        type: string
+      url:
+        title: "Url"
+        type: string
+      geo:
+        $ref: "#/definitions/GeoData"
+      engagements:
+        title: "Engagements"
+        type: integer
+      avg_likes:
+        title: "Avg likes"
+        type: integer
+      avg_comments:
+        title: "Avg comments"
+        type: integer
+      avg_views:
+        title: "Avg views"
+        type: integer
 
   Post:
     type: object,
@@ -895,12 +1093,26 @@ definitions:
       properties:
         code:
           type: string
-          description: 'Enum: `"18-24"` `"25-34"` `"35-44"` `"45-64"` `"65-"`'
+          enum: ["13-17", "18-24", "25-34", "35-44", "45-64", "65-"]
         weight:
           type: number
           description: "Default `0.01`"
       required:
         - code
+
+  AudienceGenderPerAge:
+    type: object
+    properties:
+      code:
+        title: "Code"
+        type: string
+        enum: ["13-17", "18-24", "25-34", "35-44", "45-64", "65-"]
+      male:
+        title: "Male"
+        type: number
+      female:
+        title: "Female"
+        type: number
 
   AudBrand:
     title: Audience Brand
@@ -915,13 +1127,47 @@ definitions:
       required:
         - id
 
+  AudienceBrand:
+    type: object
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      interest:
+        type: array
+        items:
+          $ref: "#/definitions/Interest"
+      weight:
+        title: "Weight"
+        type: number
+      affinity:
+        title: "Affinity"
+        description: "Measure of how volume of influencer's audience interested in specific brand relates to average on Instagram. 1.0 means the same as on average, 2.0 means 2 times more than usual on Instagram."
+        type: number
+
+  AudienceInterest:
+    type: object
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      weight:
+        title: "Weight"
+        type": number
+
   AudGender:
     title: Audience Gender
     type: object
     properties:
       code:
         type: integer
-        description: 'Enum: `"MALE"` `"FEMALE"`'
+        enum: ["MALE", "FEMALE"]
       weight:
         type: number
         description: "Default `0.05`"
@@ -941,6 +1187,85 @@ definitions:
           description: "Default `0.05`"
       required:
         - id
+
+  AudienceGeo:
+    title: "Audience geo"
+    type: object,
+    properties:
+      countries:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceGeoCountry"
+      states:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceGeoState"
+      cities:
+        type: array
+        items:
+          $ref: "#/definitions/AudienceGeoCity"
+
+  AudienceGeoCountry:
+    type: object,
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      code:
+        title: "Code"
+        type: string
+      weight:
+        title: "Weight"
+        type: number
+
+  EmbedGeoCountry:
+    title: "Country"
+    type: object
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      code:
+        title: "Code"
+        type: string
+
+  AudienceGeoState:
+    type: object,
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      weight:
+        title: "Weight"
+        type: number
+      country:
+        $ref: "#/definitions/EmbedGeoCountry"
+
+  AudienceGeoCity:
+    type: object,
+    properties:
+      id:
+        title: "Id"
+        type: integer
+      name:
+        title: "Name"
+        type: string
+      coords:
+        $ref: "#/definitions/Coords"
+      weight:
+        title: "Weight"
+        type: number
+      country:
+        $ref: "#/definitions/EmbedGeoCountry"
 
   AudLang:
     title: Audience Lang
@@ -967,6 +1292,21 @@ definitions:
         description: "Default `0.3`"
     required:
       - code
+
+  AudienceEthnicity:
+    type: object
+    properties:
+      code:
+        title: "Code"
+        type: string
+        enum: ["white", "asian", "african_american", "hispanic"]
+      name:
+        title: "Name"
+        type: string
+        enum: ["White / Caucasian", "Asian", "African American", "Hispanic"]
+      weight:
+        title: "Weight"
+        type: number
 
   Engagements:
     title: Engagements
