@@ -417,7 +417,7 @@ definitions:
         title: "Paid post perfomance"
         type: number
       geo:
-        $ref: "#/definitions/Geo"
+        $ref: "#/definitions/GeoData"
       contacts:
         type: array,
         items:
@@ -472,7 +472,7 @@ definitions:
         title: "Avg likes"
         type: integer
 
-  Geo:
+  GeoData:
     title: "Geo"
     type: object
     properties:
@@ -619,7 +619,7 @@ definitions:
         title: "Url"
         type: string
       geo:
-        $ref: "#/definitions/Geo"
+        $ref: "#/definitions/GeoData"
       engagements:
         title: "Engagements"
         type: integer
