@@ -569,11 +569,11 @@ definitions:
       audience_genders:
         type: array
         items:
-          $ref: "#/definitions/AudienceGender"
+          $ref: "#/definitions/AudGender"
       audience_ages:
         type: array
         items:
-          $ref: "#/definitions/AudienceAge"
+          $ref: "#/definitions/AudAge"
       audience_genders_per_age:
         type: array
         items:
