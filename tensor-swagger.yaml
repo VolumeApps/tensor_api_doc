@@ -202,14 +202,6 @@ paths:
           description: "Successful"
           schema:
             $ref: "#/definitions/SampleReport"
-          examples:
-            application/json:
-              success: true
-              version: "2"
-              report_info:
-                report_id: "string"
-                created: "2019-04-15T02:50:53Z"
-              user_profile:
 
 
   /identification/:
