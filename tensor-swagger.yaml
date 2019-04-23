@@ -283,11 +283,71 @@ paths:
                     avg_views: 0
                     score: 0
                 top_posts:
-                  $ref: "#/definitions/ExamplePost"
+                  - user_id: "string"
+                    username: "string"
+                    user_picture: "string"
+                    user_url: "string"
+                    type: "string"
+                    post_id: "string"
+                    created: "2019-04-22T14:12:49Z"
+                    text: "string"
+                    link: "string"
+                    mentions: ["string"]
+                    hashtags: ["string"]
+                    stat:
+                      likes: 0
+                      comments: 0
+                      views: 0
+                    sponsor:
+                      user_id: "string"
+                      username: "string"
+                    image: "string"
+                    video: "string"
+                    thumbnail: "string"
                 commercial_posts:
-                  $ref: "#/definitions/ExamplePost"
+                  - user_id: "string"
+                    username: "string"
+                    user_picture: "string"
+                    user_url: "string"
+                    type: "string"
+                    post_id: "string"
+                    created: "2019-04-22T14:12:49Z"
+                    text: "string"
+                    link: "string"
+                    mentions: ["string"]
+                    hashtags: ["string"]
+                    stat:
+                      likes: 0
+                      comments: 0
+                      views: 0
+                    sponsor:
+                      user_id: "string"
+                      username: "string"
+                    image: "string"
+                    video: "string"
+                    thumbnail: "string"
                 recent_posts:
-                  $ref: "#/definitions/ExamplePost"
+                  - user_id: "string"
+                    username: "string"
+                    user_picture: "string"
+                    user_url: "string"
+                    type: "string"
+                    post_id: "string"
+                    created: "2019-04-22T14:12:49Z"
+                    text: "string"
+                    link: "string"
+                    mentions: ["string"]
+                    hashtags: ["string"]
+                    stat:
+                      likes: 0
+                      comments: 0
+                      views: 0
+                    sponsor:
+                      user_id: "string"
+                      username: "string"
+                    image: "string"
+                    video: "string"
+                    thumbnail: "string"
 
   /reports/{report_id}/:
     x-summary: Fetch Report
