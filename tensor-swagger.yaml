@@ -283,11 +283,11 @@ paths:
                     avg_views: 0
                     score: 0
                 top_posts:
-                  - $ref: "#/definitions/ExamplePost"
+                  $ref: "#/definitions/ExamplePost"
                 commercial_posts:
-                  - $ref: "#/definitions/ExamplePost"
+                  $ref: "#/definitions/ExamplePost"
                 recent_posts:
-                  - $ref: "#/definitions/ExamplePost"
+                  $ref: "#/definitions/ExamplePost"
 
   /reports/{report_id}/:
     x-summary: Fetch Report
