@@ -163,10 +163,6 @@ paths:
       summary: Generate New Report
       description: "Creates new audience data report. Both for likers and followers at the same time."
       parameters:
-        - in: path
-          name: report_id
-          required: true
-          type: string
         - in: query
           name: api_token
           required: true
@@ -190,6 +186,108 @@ paths:
                 report_id: "string"
                 created: "2019-04-15T02:50:53Z"
               user_profile:
+                user_id: "string"
+                username: "string"
+                url: "string"
+                picture: "string"
+                fullname: "string"
+                is_verified: true
+                is_business: true
+                gender: "MALE"
+                age_group: "string"
+                language: "string"
+                followers: 0
+                engagements: 0
+                engagement_rate: 0
+                avg_likes: 0
+                avg_comments: 0
+                avg_views: 0
+                stat_history:
+                  - month: "string"
+                    followers: 0
+                    avg_likes: 0
+                paid_post_performance: 0
+                geo:
+                  city:
+                    id: 0
+                    name: "string"
+                    coords:
+                      lat: 0
+                      lon: 0
+                  state:
+                    id: 0
+                    name: "string"
+                    coords:
+                      lat: 0
+                      lon: 0
+                  country:
+                    id: 0
+                    name: "string"
+                    coords:
+                      lat: 0
+                      lon: 0
+                    code: "string"
+                contacts:
+                  - type: "youtube"
+                    value: "string"
+                top_hashtags:
+                  - tag: "string"
+                    weight: 0
+                top_mentions:
+                  - tag: "string"
+                    weight: 0
+                brand_affinity:
+                  - id: 0
+                    name: "string"
+                    interest:
+                      - id: 0
+                        name: "string"
+                interests:
+                  - id: 0
+                    name: "string"
+                relevant_tags:
+                  - tag: "string"
+                    distance: 0
+                    freq: 0
+                    tag_cnt: 0
+                similar_users:
+                  - user_id: "string"
+                    username: "string"
+                    picture: "string"
+                    followers: 0
+                    fullname: "string"
+                    url: "string"
+                    geo:
+                      city:
+                        id: 0
+                        name: "string"
+                        coords:
+                          lat: 0
+                          lon: 0
+                      state:
+                        id: 0
+                        name: "string"
+                        coords:
+                          lat: 0
+                          lon: 0
+                      country:
+                        id: 0
+                        name: "string"
+                        coords:
+                          lat: 0
+                          lon: 0
+                        code: "string"
+                    engagements: 0
+                    avg_likes: 0
+                    avg_comments: 0
+                    avg_views: 0
+                    score: 0
+                top_posts:
+                  - $ref: "#/definitions/ExamplePost"
+                commercial_posts:
+                  - $ref: "#/definitions/ExamplePost"
+                recent_posts:
+                  - $ref: "#/definitions/ExamplePost"
 
   /reports/{report_id}/:
     x-summary: Fetch Report
@@ -405,6 +503,32 @@ definitions:
         title: "Created"
         type: string
         format: date-time
+
+  ExamplePost:
+    type: object
+    properties:
+      user_id: "string"
+      username: "string"
+      user_picture: "string"
+      user_url: "string"
+      type: "string"
+      post_id: "string"
+      created: "2019-04-22T14:12:49Z"
+      text: "string"
+      link: "string"
+      mentions: ["string"]
+      hashtags: ["string"]
+      stat:
+        likes: 0
+        comments: 0
+        views: 0
+      sponsor:
+        user_id: "string"
+        username: "string"
+      image: "string"
+      video: "string"
+      thumbnail: "string"
+
 
   UserProfile:
     title: "User profile"
