@@ -155,6 +155,26 @@ paths:
                 - code: "es"
                   name: "Spanish"
 
+  /reports/:
+    x-summary: List All Reports
+    get:
+      tags:
+        - "Reports"
+      summary: List All Reports
+      description: "List audience data reports history"
+      parameters:
+        - in: query
+          name: api_token
+          required: true
+          type: string
+          description: Your api_token is required for this request
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/SampleList"
+
+
   /reports/new/:
     x-summary: Generate Report
     post:
@@ -373,6 +393,29 @@ definitions:
         $ref: "#/definitions/AudienceLikers"
       audience_followers:
         $ref: "#/definitions/AudienceFollowers"
+
+  SampleList:
+    type: object
+    properties:
+        results:
+          type: array
+          items:
+            type: object
+            properties:
+              report_id:
+                type: string
+              user_id:
+                type: string
+              username:
+                type: string
+              url:
+                type: string
+              picture:
+                type: string
+              followers:
+                type: integer
+              engagement_rate:
+                type: number
 
   ReportInfo:
     title: "Report info"
