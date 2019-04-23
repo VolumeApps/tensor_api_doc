@@ -43,6 +43,30 @@ x-tagGroups:
       - Identification
 
 paths:
+  /account/info/:
+    x-summary: List Account Info
+    get:
+      tags:
+        - "Account"
+      summary: List Account Info
+      parameters:
+        - in: query
+          name: api_token
+          required: true
+          type: string
+          description: Your api_token is required for this request
+      responses:
+        200:
+          description: Successful
+          schema:
+            $ref: "#/definitions/AccountInfo"
+          examples:
+            application/json:
+              user:
+                name: Tensor Social
+                email: hello@tensorsocial.com
+                credits: 25
+
   /brands/:
     x-summary: List Brands & Interests
     get:
@@ -130,6 +154,42 @@ paths:
                   name: "English"
                 - code: "es"
                   name: "Spanish"
+
+  /reports/new/:
+    x-summary: Generate Report
+    post:
+      tags:
+        - "Reports"
+      summary: Generate New Report
+      description: "Creates new audience data report. Both for likers and followers at the same time."
+      parameters:
+        - in: path
+          name: report_id
+          required: true
+          type: string
+        - in: query
+          name: api_token
+          required: true
+          type: string
+          description: Your api_token is required for this request
+        - in: query
+          name: username
+          required: true
+          type: string
+          description: "Instagram username, user id for link to user's profile page."
+      responses:
+        200:
+          description: "Successful"
+          schema:
+            $ref: "#/definitions/SampleReport"
+          examples:
+            application/json:
+              success: true
+              version: "2"
+              report_info:
+                report_id: "string"
+                created: "2019-04-15T02:50:53Z"
+              user_profile:
 
   /reports/{report_id}/:
     x-summary: Fetch Report
@@ -220,6 +280,19 @@ paths:
 # --------------------------- DEFINITIONS ---------------------------
 
 definitions:
+  AccountInfo:
+    type: object
+    properties:
+      user:
+        type: object
+        properties:
+          name:
+            type: string
+          email:
+            type: string
+          credits:
+            type: number
+
   brands_response:
     title: Brands Response
     type: object
