@@ -178,7 +178,7 @@ paths:
           description: "Successful"
           schema:
             $ref: "#/definitions/SampleReport"
-          examples:
+          example:
             application/json:
               success: true
               version: "2"
