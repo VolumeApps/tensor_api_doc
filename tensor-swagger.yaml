@@ -188,7 +188,7 @@ paths:
           required: true
           type: string
           description: Your api_token is required for this request
-        - in: query
+        - in: body
           name: username
           required: true
           type: string
