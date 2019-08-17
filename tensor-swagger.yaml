@@ -190,12 +190,9 @@ paths:
           description: Your api_token is required for this request
         - name: body
           in: body
-          type: object
           required: true
-          properties:
-            username:
-              type: string
-          description: "Instagram username, user id for link to user's profile page."
+          schema:
+            $ref: "#/definitions/New_Report"
       responses:
         200:
           description: "Successful"
@@ -1058,6 +1055,13 @@ definitions:
         $ref: "#/definitions/PostStat"
       sponsor:
         $ref: "#/definitions/Sponsor"
+
+  New_Report:
+    title: New Influencer Report
+    type: object
+    properties:
+      username:
+        type: string
 
   Search:
     title: Search Influencers
