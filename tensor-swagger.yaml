@@ -188,8 +188,8 @@ paths:
           required: true
           type: string
           description: Your api_token is required for this request
-        - in: body
-          name: username
+        - name: username
+          in: body
           required: true
           type: string
           description: "Instagram username, user id for link to user's profile page."
