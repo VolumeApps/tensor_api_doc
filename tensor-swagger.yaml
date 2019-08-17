@@ -3,7 +3,7 @@ info:
   version: "1.0"
   title: "Tensor Social API"
   x-logo:
-    url: "http://tensorsocial.com/src/images/TensorLogo.svg"
+    url: "https://dev.tensorsocial.com/static/media/LOGO_TS-1.ea9ea763.svg"
     backgroundColor: #FFFFFF
     altText: Tensor Social logo
   description: |
@@ -188,10 +188,13 @@ paths:
           required: true
           type: string
           description: Your api_token is required for this request
-        - name: username
+        - name: body
           in: body
+          type: object
           required: true
-          type: string
+          properties:
+            username:
+              type: string
           description: "Instagram username, user id for link to user's profile page."
       responses:
         200:
