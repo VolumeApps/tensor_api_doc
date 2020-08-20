@@ -39,12 +39,14 @@ x-tagGroups:
       - Reports
       - Identification
 paths:
-  /account/info/:
+  /account/info:
     x-summary: List Account Info
     get:
       tags:
         - Account
       summary: List Account Info
+      operationId: "account-info"
+      description: Returns account info and credit total
       parameters:
         - in: query
           name: api_token
@@ -63,12 +65,13 @@ paths:
                 email: hello@tensorsocial.com
                 credits: 25
     parameters: []
-  brands/:
+  /brands:
     x-summary: List Brands & Interests
     get:
       tags:
         - Dictionaries
       summary: List Brands & Interests
+      operationId: "brands-and-interests"
       description: List of all interests and brand that can be used as filter in Search or may be returned in Audience Data report.
       responses:
         '200':
@@ -86,12 +89,13 @@ paths:
                   - id: 2
                     name: 20th Century Fox
     parameters: []
-  /locations/:
+  /locations:
     x-summary: List Locations
     get:
       tags:
         - Dictionaries
       summary: List Locations
+      operationId: "locations"
       description: List geo locations under certain filters.
       parameters:
         - in: query
@@ -131,12 +135,13 @@ paths:
                   id: 161816
                 country:
                   id: 148838
-  /languages/:
+  /languages:
     x-summary: List Languages
     get:
       tags:
         - Dictionaries
       summary: List Languages
+      operationId: "languages"
       description: List all supported languages ordered by descend of their frequency. They can be used as filter in Search or may be returned in Audience Data report. We recommend that you cache this dictionary because it updates rarely.
       responses:
         '200':
@@ -151,12 +156,13 @@ paths:
                   name: English
                 - code: es
                   name: Spanish
-  /reports/:
+  /reports:
     x-summary: List All Reports
     get:
       tags:
         - Reports
       summary: List All Reports
+      operationId: "all-reports"
       description: List audience data reports history
       parameters:
         - in: query
@@ -169,12 +175,13 @@ paths:
           description: Successful
           schema:
             $ref: '#/definitions/SampleList'
-  /reports/new/:
+  /reports/new:
     x-summary: Generate Report
     post:
       tags:
         - Reports
       summary: Generate New Report
+      operationId: "new-report"
       description: Creates new audience data report. Both for likers and followers at the same time.
       parameters:
         - in: query
@@ -192,12 +199,13 @@ paths:
           description: Successful
           schema:
             $ref: '#/definitions/SampleReport'
-  '/reports/{report_id}/':
+  '/reports/{report_id}':
     x-summary: Fetch Report
     get:
       tags:
         - Reports
       summary: Fetch Report
+      operationId: "fetch-report"
       description: Fetch previously generated report. We are storing old reports for 30 days.
       parameters:
         - in: path
@@ -215,12 +223,14 @@ paths:
           schema:
             $ref: '#/definitions/SampleReport'
           examples: {}
-  /identification/:
+  /identification:
     x-summary: Search for influencers
     post:
       tags:
         - Identification
       summary: Search for influencers
+      operationId: "search-influencers"
+      description: Influencer search for Instagram, YouTube, & TikTok
       parameters:
         - in: query
           name: api_token
@@ -1257,7 +1267,7 @@ definitions:
     type: object
     properties:
       code:
-        type: integer
+        type: string
         enum:
           - MALE
           - FEMALE
