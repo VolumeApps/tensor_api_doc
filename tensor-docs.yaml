@@ -1,7 +1,10 @@
 swagger: '2.0'
 info:
+  title: Tensor Social Docs
+  x-stoplight:
+    docs:
+      showModels: false
   version: '1.0'
-  title: Tensor Social API
   x-logo:
     url: 'https://dev.tensorsocial.com/static/media/LOGO_TS-1.ea9ea763.svg'
     backgroundColor: null
@@ -38,9 +41,6 @@ x-tagGroups:
       - Dictionaries
       - Reports
       - Identification
-x-stoplight:
-  docs:
-    showModels: false
 paths:
   /account/info:
     x-summary: List Account Info
@@ -1046,7 +1046,6 @@ definitions:
     type: object
     properties:
       search:
-        type: object
         $ref: '#/definitions/Filters'
   Filters:
     title: Filters
