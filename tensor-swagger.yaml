@@ -202,6 +202,7 @@ paths:
           description: Successful
           schema:
             $ref: '#/definitions/SampleReport'
+          examples: {}
   '/reports/{report_id}':
     x-summary: Fetch Report
     get:
@@ -301,7 +302,6 @@ definitions:
       success:
         type: boolean
       data:
-        type: object
         $ref: '#/definitions/BrandsData'
   BrandsData:
     title: Brands & Interests
@@ -341,10 +341,8 @@ definitions:
         type: string
         description: 'Name of geo location with country name, e.g. ''Paris, France'''
       state:
-        type: object
         $ref: '#/definitions/locationObject'
       country:
-        type: object
         $ref: '#/definitions/locationObject'
   locationObject:
     title: Location Object
@@ -359,9 +357,9 @@ definitions:
       success:
         type: boolean
       data:
-        type: array
         $ref: '#/definitions/LanguageObject'
   LanguageObject:
+    type: array
     title: Language Data
     items:
       type: object
@@ -1055,25 +1053,18 @@ definitions:
     type: object
     properties:
       audience_age:
-        type: array
         $ref: '#/definitions/AudAge'
       audience_brand:
-        type: array
         $ref: '#/definitions/AudBrand'
       audience_brand_category:
-        type: array
         $ref: '#/definitions/AudBrand'
       audience_gender:
-        type: object
         $ref: '#/definitions/AudGender'
       audience_geo:
-        type: array
         $ref: '#/definitions/AudGeo'
       audience_lang:
-        type: object
         $ref: '#/definitions/AudLang'
       audience_race:
-        type: object
         $ref: '#/definitions/AudRace'
       brand:
         type: array
@@ -1086,31 +1077,23 @@ definitions:
           type: integer
         description: You can get a valid interest (brand category) id from our dictionary
       engagements:
-        type: object
         $ref: '#/definitions/Engagements'
       followers:
-        type: object
         $ref: '#/definitions/Followers'
       gender:
-        type: object
         $ref: '#/definitions/Gender'
       age:
-        type: object
         $ref: '#/definitions/Age'
       geo:
-        type: array
         $ref: '#/definitions/Geo'
       lang:
-        type: object
         $ref: '#/definitions/Lang'
       race:
-        type: object
         $ref: '#/definitions/Race'
       text:
         type: string
         description: Search phrase within influencer bio
       engagement_rate:
-        type: object
         $ref: '#/definitions/EngageRate'
       is_business:
         type: boolean
@@ -1172,6 +1155,7 @@ definitions:
       has_ads: true
       has_email: true
   AudAge:
+    type: array
     title: Audience Age
     items:
       type: object
@@ -1226,6 +1210,7 @@ definitions:
         title: Female
         type: number
   AudBrand:
+    type: array
     title: Audience Brand
     items:
       type: object
@@ -1292,6 +1277,7 @@ definitions:
         title: Weight
         type: number
   AudGeo:
+    type: array
     title: Audience Geo
     items:
       type: object
@@ -1458,6 +1444,7 @@ definitions:
         type: string
         description: 'Enum: `"18"` `"25"` `"35"` `"45"` `"65"`'
   Geo:
+    type: array
     title: Geo
     items:
       type: object
