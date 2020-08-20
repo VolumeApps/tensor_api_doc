@@ -1,10 +1,10 @@
-swagger: "2.0"
+swagger: '2.0'
 info:
-  version: "1.0"
-  title: "Tensor Social API"
+  version: '1.0'
+  title: Tensor Social API
   x-logo:
-    url: "https://dev.tensorsocial.com/static/media/LOGO_TS-1.ea9ea763.svg"
-    backgroundColor: #FFFFFF
+    url: 'https://dev.tensorsocial.com/static/media/LOGO_TS-1.ea9ea763.svg'
+    backgroundColor: null
     altText: Tensor Social logo
   description: |
     # Introduction
@@ -14,26 +14,23 @@ info:
     Authentication is handled via API tokens that you need to send as a query parameter when making any request to our API.
 
     # Rate Limit
-    We are limiting one IP to 10 requests per seconds. If you are sending more requests you will receieve a 429 response status code.
-
+    We are limiting one IP to 10 requests per second. If you are sending more requests you will receieve a 429 response status code.
 host: api.tensorsocial.com
-basePath: /
 schemes:
-  - "http"
+  - https
 consumes:
   - application/json
 produces:
   - application/json
 tags:
   - name: Dictionaries
-    description: We use various objects to look for Influencers or show metrics in Audience Data. For objects like brands, country and city, languages we have a set of helper dictionaries. These dictionaries do not require API token, requesting them is totally free.
+    description: 'We use various objects to look for Influencers or show metrics in Audience Data. For objects like brands, country and city, languages we have a set of helper dictionaries. These dictionaries do not require API token, requesting them is totally free.'
   - name: Account
     description: You can check how much credits are left using the account/info endpoint.
   - name: Reports
-    description: Creates new audience data report both for likers and followers at the same time. We recommend to use user's Instagram id rather than username wherever possible, as Influencers often change their usernames. User IDs are constant for a given user, and so storing and making lookups by the Instagram user ID will help avoid unexpected behaviour.
+    description: 'Creates new audience data report both for likers and followers at the same time. We recommend to use user''s Instagram id rather than username wherever possible, as Influencers often change their usernames. User IDs are constant for a given user, and so storing and making lookups by the Instagram user ID will help avoid unexpected behaviour.'
   - name: Identification
     description: Search for influencers according to the following filters.
-
 x-tagGroups:
   - name: Endpoints
     tags:
@@ -41,13 +38,12 @@ x-tagGroups:
       - Dictionaries
       - Reports
       - Identification
-
 paths:
   /account/info/:
     x-summary: List Account Info
     get:
       tags:
-        - "Account"
+        - Account
       summary: List Account Info
       parameters:
         - in: query
@@ -56,45 +52,45 @@ paths:
           type: string
           description: Your api_token is required for this request
       responses:
-        200:
+        '200':
           description: Successful
           schema:
-            $ref: "#/definitions/AccountInfo"
+            $ref: '#/definitions/AccountInfo'
           examples:
             application/json:
               user:
                 name: Tensor Social
                 email: hello@tensorsocial.com
                 credits: 25
-
-  /brands/:
+    parameters: []
+  brands/:
     x-summary: List Brands & Interests
     get:
       tags:
-        - "Dictionaries"
+        - Dictionaries
       summary: List Brands & Interests
-      description: "List of all interests and brand that can be used as filter in Search or may be returned in Audience Data report."
+      description: List of all interests and brand that can be used as filter in Search or may be returned in Audience Data report.
       responses:
-        200:
+        '200':
           description: Successful
           schema:
-            $ref: "#/definitions/brands_response"
+            $ref: '#/definitions/brands_response'
           examples:
             application/json:
               status: true
               data:
                 interests:
                   - id: 1
-                    name: "Television & Film"
+                    name: Television & Film
                 brands:
                   - id: 2
-                    name: "20th Century Fox"
-
+                    name: 20th Century Fox
+    parameters: []
   /locations/:
     x-summary: List Locations
     get:
       tags:
-        - "Dictionaries"
+        - Dictionaries
       summary: List Locations
       description: List geo locations under certain filters.
       parameters:
@@ -105,63 +101,63 @@ paths:
         - in: query
           name: limit
           type: integer
-          description: "Limit search results (Default: `10`)"
+          description: 'Limit search results (Default: `10`)'
         - in: query
           name: types
           type: string
-          description: 'Limit search results to these types -> `"city"` `"state"` or `"country"`'
+          description: Limit search results to these types -> `"city"` `"state"` or `"country"`
       responses:
-        200:
+        '200':
           description: Successful
           schema:
-            $ref: "#/definitions/location_response"
+            $ref: '#/definitions/location_response'
           examples:
             application/json:
               - id: 122604
-                type: ["city"]
-                name: "Chicago"
-                title: "Chicago, Illinois, United States"
+                type:
+                  - city
+                name: Chicago
+                title: 'Chicago, Illinois, United States'
                 state:
                   id: 122586
                 country:
                   id: 148838
               - id: 127190
-                type: ["city"]
-                name: "East Chicago"
-                title: "East Chicago, Indiana, United States"
+                type:
+                  - city
+                name: East Chicago
+                title: 'East Chicago, Indiana, United States'
                 state:
                   id: 161816
                 country:
                   id: 148838
-
   /languages/:
     x-summary: List Languages
     get:
       tags:
-        - "Dictionaries"
+        - Dictionaries
       summary: List Languages
-      description: "List all supported languages ordered by descend of their frequency. They can be used as filter in Search or may be returned in Audience Data report. We recommend that you cache this dictionary because it updates rarely."
+      description: List all supported languages ordered by descend of their frequency. They can be used as filter in Search or may be returned in Audience Data report. We recommend that you cache this dictionary because it updates rarely.
       responses:
-        200:
+        '200':
           description: Successful
           schema:
-            $ref: "#/definitions/language_response"
+            $ref: '#/definitions/language_response'
           examples:
             application/json:
               status: true
               data:
-                - code: "en"
-                  name: "English"
-                - code: "es"
-                  name: "Spanish"
-
+                - code: en
+                  name: English
+                - code: es
+                  name: Spanish
   /reports/:
     x-summary: List All Reports
     get:
       tags:
-        - "Reports"
+        - Reports
       summary: List All Reports
-      description: "List audience data reports history"
+      description: List audience data reports history
       parameters:
         - in: query
           name: api_token
@@ -169,19 +165,17 @@ paths:
           type: string
           description: Your api_token is required for this request
       responses:
-        200:
-          description: "Successful"
+        '200':
+          description: Successful
           schema:
-            $ref: "#/definitions/SampleList"
-
-
+            $ref: '#/definitions/SampleList'
   /reports/new/:
     x-summary: Generate Report
     post:
       tags:
-        - "Reports"
+        - Reports
       summary: Generate New Report
-      description: "Creates new audience data report. Both for likers and followers at the same time."
+      description: Creates new audience data report. Both for likers and followers at the same time.
       parameters:
         - in: query
           name: api_token
@@ -192,21 +186,19 @@ paths:
           in: body
           required: true
           schema:
-            $ref: "#/definitions/New_Report"
+            $ref: '#/definitions/New_Report'
       responses:
-        200:
-          description: "Successful"
+        '200':
+          description: Successful
           schema:
-            $ref: "#/definitions/SampleReport"
-
-
-  /reports/{report_id}/:
+            $ref: '#/definitions/SampleReport'
+  '/reports/{report_id}/':
     x-summary: Fetch Report
     get:
       tags:
-        - "Reports"
+        - Reports
       summary: Fetch Report
-      description: "Fetch previously generated report. We are storing old reports for 30 days."
+      description: Fetch previously generated report. We are storing old reports for 30 days.
       parameters:
         - in: path
           name: report_id
@@ -218,68 +210,64 @@ paths:
           type: string
           description: Your api_token is required for this request
       responses:
-        200:
-          description: "Successful"
+        '200':
+          description: Successful
           schema:
-            $ref: "#/definitions/SampleReport"
-
-
+            $ref: '#/definitions/SampleReport'
+          examples: {}
   /identification/:
     x-summary: Search for influencers
     post:
       tags:
-        - "Identification"
+        - Identification
       summary: Search for influencers
       parameters:
         - in: query
           name: api_token
-          required: true
           type: string
           description: Your api_token is required for this request
+          required: true
         - name: body
           in: body
           required: true
           schema:
-            $ref: "#/definitions/Search"
+            $ref: '#/definitions/Search'
       responses:
-        200:
-          description: "Search Successful"
+        '200':
+          description: Search Successful
           schema:
-            $ref: "#/definitions/SearchResponse"
+            $ref: '#/definitions/SearchResponse'
           examples:
             application/json:
               total: 25575764
               users:
-                - user_id: "25025320"
-                  name: "Instagram"
-                  username: "instagram"
-                  url: "https://www.instagram.com/instagram/"
-                  picture: "http://img.tensorsocial.com/?https://scontent-frx5-1.cdninstagram.com/t51.2885-19/s320x320/14719833_310540259320655_1605122788543168512_a.jpg"
+                - user_id: '25025320'
+                  name: Instagram
+                  username: instagram
+                  url: 'https://www.instagram.com/instagram/'
+                  picture: 'http://img.tensorsocial.com/?https://scontent-frx5-1.cdninstagram.com/t51.2885-19/s320x320/14719833_310540259320655_1605122788543168512_a.jpg'
                   followers: 293555593
                   engagement_rate: 0.003065746391689427
                   match:
                     extra: {}
-                - user_id: "173560420"
-                  name: "Cristiano Ronaldo"
-                  username: "cristiano"
-                  url: "https://www.instagram.com/cristiano/"
-                  picture: "http://img.tensorsocial.com/?https://scontent-frx5-1.cdninstagram.com/t51.2885-19/s320x320/55837776_379384389454688_4456240822588801024_n.jpg"
+                - user_id: '173560420'
+                  name: Cristiano Ronaldo
+                  username: cristiano
+                  url: 'https://www.instagram.com/cristiano/'
+                  picture: 'http://img.tensorsocial.com/?https://scontent-frx5-1.cdninstagram.com/t51.2885-19/s320x320/55837776_379384389454688_4456240822588801024_n.jpg'
                   followers: 161980125
                   engagement_rate: 0.031196549576684177
                   match:
                     extra: {}
-                - user_id: "7719696"
-                  name: "Ariana Grande"
-                  username: "arianagrande"
-                  url: "https://www.instagram.com/arianagrande/"
-                  picture: "http://img.tensorsocial.com/?https://scontent-atl3-1.cdninstagram.com/t51.2885-19/s320x320/54511215_1099923480217605_7428801122808102912_n.jpg"
+                - user_id: '7719696'
+                  name: Ariana Grande
+                  username: arianagrande
+                  url: 'https://www.instagram.com/arianagrande/'
+                  picture: 'http://img.tensorsocial.com/?https://scontent-atl3-1.cdninstagram.com/t51.2885-19/s320x320/54511215_1099923480217605_7428801122808102912_n.jpg'
                   followers: 151320982
                   engagement_rate: 0.012800029278160513
                   match:
                     extra: {}
-
-# --------------------------- DEFINITIONS ---------------------------
-
 definitions:
   AccountInfo:
     type: object
@@ -293,7 +281,6 @@ definitions:
             type: string
           credits:
             type: number
-
   brands_response:
     title: Brands Response
     type: object
@@ -302,8 +289,7 @@ definitions:
         type: boolean
       data:
         type: object
-        $ref: "#/definitions/BrandsData"
-
+        $ref: '#/definitions/BrandsData'
   BrandsData:
     title: Brands & Interests
     type: object
@@ -326,7 +312,6 @@ definitions:
               type: integer
             name:
               type: string
-
   location_response:
     title: Locations Response
     type: object
@@ -338,24 +323,22 @@ definitions:
         description: 'Enum: `"city"` `"state"` `"country"`'
       name:
         type: string
-        description: "Name of geo location"
+        description: Name of geo location
       title:
         type: string
-        description: "Name of geo location with country name, e.g. 'Paris, France'"
+        description: 'Name of geo location with country name, e.g. ''Paris, France'''
       state:
         type: object
-        $ref: "#/definitions/locationObject"
+        $ref: '#/definitions/locationObject'
       country:
         type: object
-        $ref: "#/definitions/locationObject"
-
+        $ref: '#/definitions/locationObject'
   locationObject:
     title: Location Object
     type: object
     properties:
       id:
         type: integer
-
   language_response:
     title: Languages Response
     type: object
@@ -364,8 +347,7 @@ definitions:
         type: boolean
       data:
         type: array
-        $ref: "#/definitions/LanguageObject"
-
+        $ref: '#/definitions/LanguageObject'
   LanguageObject:
     title: Language Data
     items:
@@ -375,595 +357,585 @@ definitions:
           type: string
         name:
           type: string
-
   SampleReport:
     type: object
     properties:
       success:
-        title: "Success"
+        title: Success
         type: boolean
       version:
-        title: "Version"
+        title: Version
         type: string
       report_info:
-        $ref: "#/definitions/ReportInfo"
+        $ref: '#/definitions/ReportInfo'
       user_profile:
-        $ref: "#/definitions/UserProfile"
+        $ref: '#/definitions/UserProfile'
       audience_likers:
-        $ref: "#/definitions/AudienceLikers"
+        $ref: '#/definitions/AudienceLikers'
       audience_followers:
-        $ref: "#/definitions/AudienceFollowers"
-
+        $ref: '#/definitions/AudienceFollowers'
   SampleList:
     type: object
     properties:
-        results:
-          type: array
-          items:
-            type: object
-            properties:
-              report_id:
-                type: string
-              user_id:
-                type: string
-              username:
-                type: string
-              url:
-                type: string
-              picture:
-                type: string
-              followers:
-                type: integer
-              engagement_rate:
-                type: number
-
+      results:
+        type: array
+        items:
+          type: object
+          properties:
+            report_id:
+              type: string
+            user_id:
+              type: string
+            username:
+              type: string
+            url:
+              type: string
+            picture:
+              type: string
+            followers:
+              type: integer
+            engagement_rate:
+              type: number
   ReportInfo:
-    title: "Report info"
+    title: Report info
     type: object
     properties:
       report_id:
-        title: "Report id"
+        title: Report id
         type: string
         minLength: 1
       created:
-        title: "Created"
+        title: Created
         type: string
         format: date-time
-
   ExamplePost:
     type: object
     properties:
-      user_id: "string"
-      username: "string"
-      user_picture: "string"
-      user_url: "string"
-      type: "string"
-      post_id: "string"
-      created: "2019-04-22T14:12:49Z"
-      text: "string"
-      link: "string"
-      mentions: ["string"]
-      hashtags: ["string"]
+      user_id: string
+      username: string
+      user_picture: string
+      user_url: string
+      type: string
+      post_id: string
+      created: '2019-04-22T14:12:49Z'
+      text: string
+      link: string
+      mentions:
+        - string
+      hashtags:
+        - string
       stat:
         likes: 0
         comments: 0
         views: 0
       sponsor:
-        user_id: "string"
-        username: "string"
-      image: "string"
-      video: "string"
-      thumbnail: "string"
-
-
+        user_id: string
+        username: string
+      image: string
+      video: string
+      thumbnail: string
   UserProfile:
-    title: "User profile"
+    title: User profile
     type: object
     properties:
       user_id:
-        title: "User id"
+        title: User id
         type: string
       username:
-        title: "Username"
+        title: Username
         type: string
       url:
-        title: "Url"
+        title: Url
         type: string
       picture:
-        title: "Picture"
+        title: Picture
         type: string
       fullname:
-        title: "Fullname"
+        title: Fullname
         type: string
       is_verified:
-        title: "Is verified"
+        title: Is verified
         type: boolean
       is_business:
-        title: "Is business"
+        title: Is business
         type: boolean
       gender:
-        title: "Gender"
+        title: Gender
         type: string
-        enum: ["MALE", "FEMALE"]
+        enum:
+          - MALE
+          - FEMALE
       age_group:
-        title: "Age group"
+        title: Age group
         type: string
       language:
-        title: "Language"
+        title: Language
         type: string
       followers:
-        title: "Followers"
+        title: Followers
         type: integer
       engagements:
-        title: "Engagements"
+        title: Engagements
         type: integer
       engagement_rate:
-        title: "Engagement rate"
+        title: Engagement rate
         type: number
       avg_likes:
-        title: "Avg likes"
+        title: Avg likes
         type: integer
       avg_comments:
-        title: "Avg comments"
+        title: Avg comments
         type: integer
       avg_views:
-        title: "Avg views"
+        title: Avg views
         type: integer
       stat_history:
         type: array
         items:
-          $ref: "#/definitions/MonthlyStat"
+          $ref: '#/definitions/MonthlyStat'
       paid_post_perfomance:
-        title: "Paid post perfomance"
+        title: Paid post perfomance
         type: number
       geo:
-        $ref: "#/definitions/GeoData"
+        $ref: '#/definitions/GeoData'
       contacts:
         type: array
         items:
-          $ref: "#/definitions/Contact"
+          $ref: '#/definitions/Contact'
       top_hashtags:
         type: array
         items:
-          $ref: "#/definitions/Tag"
+          $ref: '#/definitions/Tag'
       top_mentions:
         type: array
         items:
-          $ref: "#/definitions/Tag"
+          $ref: '#/definitions/Tag'
       brand_affinity:
         type: array
         items:
-          $ref: "#/definitions/Brand"
+          $ref: '#/definitions/Brand'
       interests:
         type: array
         items:
-          $ref: "#/definitions/Interest"
+          $ref: '#/definitions/Interest'
       relevant_tags:
         type: array
         items:
-          $ref: "#/definitions/RelevantTag"
+          $ref: '#/definitions/RelevantTag'
       similar_users:
         type: array
         items:
-          $ref: "#/definitions/ScoredUser"
+          $ref: '#/definitions/ScoredUser'
       top_posts:
         type: array
         items:
-          $ref: "#/definitions/Post"
+          $ref: '#/definitions/Post'
       commercial_posts:
         type: array
         items:
-          $ref: "#/definitions/Post"
+          $ref: '#/definitions/Post'
       recent_posts:
         type: array
         items:
-          $ref: "#/definitions/PostWithoutImage"
-
+          $ref: '#/definitions/PostWithoutImage'
   AudienceLikers:
-    title: "Audience likers"
+    title: Audience likers
     type: object
     properties:
       success:
-        title: "Success"
-        description: "Set to false in case of there are no specific report"
+        title: Success
+        description: Set to false in case of there are no specific report
         type: boolean
       error:
-        title: "Error"
-        description: "Code for reason of lack of report. Only if success=false"
+        title: Error
+        description: Code for reason of lack of report. Only if success=false
         type: string
-        enum: ["empty_audience"]
+        enum:
+          - empty_audience
       error_message:
-        title: "Error message"
-        description: "Details for reason of lack of report. Only if success=false"
+        title: Error message
+        description: Details for reason of lack of report. Only if success=false
         type: string
       data:
-        $ref: "#/definitions/AudienceDataLikers"
-
+        $ref: '#/definitions/AudienceDataLikers'
   AudienceDataLikers:
-    title: "Data"
+    title: Data
     type: object
     properties:
       notable_users_ratio:
-        title: "Notable users ratio"
+        title: Notable users ratio
         type: number
       audience_credibility:
-        title: "Audience credibility"
+        title: Audience credibility
         type: number
       credibility_class:
-        title: "Credibility class"
+        title: Credibility class
         type: string
-        enum: ["bad", "low", "normal", "high", "best"]
+        enum:
+          - bad
+          - low
+          - normal
+          - high
+          - best
       audience_genders:
         type: array
         items:
-          $ref: "#/definitions/AudienceGender"
+          $ref: '#/definitions/AudienceGender'
       audience_ages:
         type: array
         items:
-          $ref: "#/definitions/AudienceAge"
+          $ref: '#/definitions/AudienceAge'
       audience_genders_per_age:
         type: array
         items:
-          $ref: "#/definitions/AudienceGenderPerAge"
+          $ref: '#/definitions/AudienceGenderPerAge'
       audience_ethnicities:
         type: array
         items:
-          $ref: "#/definitions/AudienceEthnicity"
+          $ref: '#/definitions/AudienceEthnicity'
       audience_brand_affinity:
         type: array
         items:
-          $ref: "#/definitions/AudienceBrand"
+          $ref: '#/definitions/AudienceBrand'
       audience_interests:
         type: array
         items:
-          $ref: "#/definitions/AudienceInterest"
+          $ref: '#/definitions/AudienceInterest'
       audience_geo:
-        $ref: "#/definitions/AudienceGeo"
+        $ref: '#/definitions/AudienceGeo'
       audience_lookalikes:
         type: array
         items:
-          $ref: "#/definitions/ScoredUser"
+          $ref: '#/definitions/ScoredUser'
       notable_users:
         type: array
         items:
-          $ref: "#/definitions/User"
+          $ref: '#/definitions/User'
       likes_not_from_followers:
-        title: "Likes not from followers"
+        title: Likes not from followers
         type: number
-
   AudienceFollowers:
-    title: "Audience followers"
+    title: Audience followers
     type: object
     properties:
       success:
-        title: "Success"
-        description: "Set to false in case of there are no specific report"
+        title: Success
+        description: Set to false in case of there are no specific report
         type: boolean
       error:
-        title: "Error"
-        description: "Code for reason of lack of report. Only if success=false"
+        title: Error
+        description: Code for reason of lack of report. Only if success=false
         type: string
-        enum": ["empty_audience"]
+        enum":
+          - empty_audience
       error_message:
-        title: "Error message"
-        description: "Details for reason of lack of report. Only if success=false"
+        title: Error message
+        description: Details for reason of lack of report. Only if success=false
         type: string
       data:
-        $ref: "#/definitions/AudienceData"
-
+        $ref: '#/definitions/AudienceData'
   AudienceData:
-    title: "Data"
+    title: Data
     type: object
     properties:
       notable_users_ratio:
-        title: "Notable users ratio"
+        title: Notable users ratio
         type: number
       audience_credibility:
-        title: "Audience credibility"
+        title: Audience credibility
         type: number
       credibility_class:
-        title: "Credibility class"
-        description: "Only in Audience DAta report, there are no class in Post Analytics."
+        title: Credibility class
+        description: 'Only in Audience DAta report, there are no class in Post Analytics.'
         type: string
-        enum: ["bad", "low", "normal", "high", "best"]
+        enum:
+          - bad
+          - low
+          - normal
+          - high
+          - best
       audience_genders:
         type: array
         items:
-          $ref: "#/definitions/AudienceGender"
+          $ref: '#/definitions/AudienceGender'
       audience_ages:
         type: array
         items:
-          $ref: "#/definitions/AudienceAge"
+          $ref: '#/definitions/AudienceAge'
       audience_genders_per_age:
         type: array
         items:
-          $ref: "#/definitions/AudienceGenderPerAge"
+          $ref: '#/definitions/AudienceGenderPerAge'
       audience_ethnicities:
         type: array
         items:
-          $ref: "#/definitions/AudienceEthnicity"
+          $ref: '#/definitions/AudienceEthnicity'
       audience_brand_affinity:
         type: array
         items:
-          $ref: "#/definitions/AudienceBrand"
+          $ref: '#/definitions/AudienceBrand'
       audience_interests:
         type: array
         items:
-          $ref: "#/definitions/AudienceInterest"
+          $ref: '#/definitions/AudienceInterest'
       audience_geo:
-        $ref: "#/definitions/AudienceGeo"
+        $ref: '#/definitions/AudienceGeo'
       audience_lookalikes:
         type: array
         items:
-          $ref: "#/definitions/ScoredUser"
+          $ref: '#/definitions/ScoredUser'
       notable_users:
         type: array
         items:
-          $ref: "#/definitions/User"
-
+          $ref: '#/definitions/User'
   MonthlyStat:
     type: object
     properties:
       month:
-        title: "Month"
+        title: Month
         type: string
       followers:
-        title: "Followers"
+        title: Followers
         type: integer
       avg_likes:
-        title: "Avg likes"
+        title: Avg likes
         type: integer
-
   GeoData:
-    title: "Geo"
+    title: Geo
     type: object
     properties:
       city:
-        $ref: "#/definitions/GeoCity"
+        $ref: '#/definitions/GeoCity'
       state:
-        $ref: "#/definitions/GeoState"
+        $ref: '#/definitions/GeoState'
       country:
-        $ref: "#/definitions/GeoCountry"
-
+        $ref: '#/definitions/GeoCountry'
   GeoCity:
-    title: "City"
+    title: City
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       coords:
-        $ref: "#/definitions/Coords"
-
+        $ref: '#/definitions/Coords'
   GeoState:
-    title: "State"
+    title: State
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       coords:
-        $ref: "#/definitions/Coords"
-
+        $ref: '#/definitions/Coords'
   GeoCountry:
-    title: "Country"
+    title: Country
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       coords:
-        $ref: "#/definitions/Coords"
+        $ref: '#/definitions/Coords'
       code:
-        title: "Code"
+        title: Code
         type: string
-
   Coords:
-    title: "Coords"
+    title: Coords
     type": object
     properties:
       lat:
-        title: "Lat"
+        title: Lat
         type: number
       lon:
-        title: "Lon"
+        title: Lon
         type: number
-
   Contact:
     type: object
     properties:
       type:
-        title: "Type"
+        title: Type
         type": string
         enum:
-          [
-            "youtube",
-            "snapchat",
-            "facebook",
-            "whatsapp",
-            "sayat",
-            "sarahah",
-            "vk",
-            "twitter",
-            "email",
-            "phone",
-            "viber",
-            "telegram",
-            "bbm",
-            "lineid",
-            "kik",
-            "wechat",
-            "skype",
-            "tiktok",
-          ]
+          - youtube
+          - snapchat
+          - facebook
+          - whatsapp
+          - sayat
+          - sarahah
+          - vk
+          - twitter
+          - email
+          - phone
+          - viber
+          - telegram
+          - bbm
+          - lineid
+          - kik
+          - wechat
+          - skype
+          - tiktok
       value:
-        title: "Value"
+        title: Value
         type: string
-
   Tag:
     type: object
     properties:
       tag:
-        title: "Tag"
+        title: Tag
         type: string
       weight:
-        title: "Weight"
+        title: Weight
         type: number
-
   Brand:
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       interest:
         type: array
         items:
-          $ref: "#/definitions/Interest"
-
+          $ref: '#/definitions/Interest'
   Interest:
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
-
   RelevantTag:
     type: object
     properties:
       tag:
-        title: "Tag"
+        title: Tag
         type: string
       distance:
-        title: "Distance"
+        title: Distance
         type: number
       freq:
-        title: "Freq"
+        title: Freq
         type: number
       tag_cnt:
-        title: "Tag cnt"
+        title: Tag cnt
         type: integer
-
   ScoredUser:
     type: object
     properties:
       user_id:
-        title: "User id"
+        title: User id
         type: string
       username:
-        title: "Username"
+        title: Username
         type: string
       picture:
-        title: "Picture"
+        title: Picture
         type: string
       followers:
-        title: "Followers"
+        title: Followers
         type: integer
       fullname:
-        title: "Fullname"
+        title: Fullname
         type: string
       url:
-        title: "Url"
+        title: Url
         type: string
       geo:
-        $ref: "#/definitions/GeoData"
+        $ref: '#/definitions/GeoData'
       engagements:
-        title: "Engagements"
+        title: Engagements
         type: integer
       avg_likes:
-        title: "Avg likes"
+        title: Avg likes
         type: integer
       avg_comments:
-        title: "Avg comments"
+        title: Avg comments
         type: integer
       avg_views:
-        title: "Avg views"
+        title: Avg views
         type: integer
       score:
-        title: "Score"
+        title: Score
         type: number
-
   User:
     type: object
     properties:
       user_id:
-        title": "User id"
+        title": User id
         type: string
       username:
-        title: "Username"
+        title: Username
         type: string
       picture:
-        title: "Picture"
+        title: Picture
         type: string
       followers:
-        title: "Followers"
+        title: Followers
         type: integer
       fullname:
-        title: "Fullname"
+        title: Fullname
         type: string
       url:
-        title: "Url"
+        title: Url
         type: string
       geo:
-        $ref: "#/definitions/GeoData"
+        $ref: '#/definitions/GeoData'
       engagements:
-        title: "Engagements"
+        title: Engagements
         type: integer
       avg_likes:
-        title: "Avg likes"
+        title: Avg likes
         type: integer
       avg_comments:
-        title: "Avg comments"
+        title: Avg comments
         type: integer
       avg_views:
-        title: "Avg views"
+        title: Avg views
         type: integer
-
   Post:
     type: object
     properties:
       user_id:
-        title: "User id"
+        title: User id
         type: string
       username:
-        title: "Username"
+        title: Username
         type: string
       user_picture:
-        title: "User picture"
+        title: User picture
         type: string
       user_url:
-        title: "User url"
+        title: User url
         type: string
       type:
-        title: "Type"
+        title: Type
         type: string
       post_id:
-        title: "Post id"
+        title: Post id
         type: string
       created:
-        title: "Created"
+        title: Created
         type: string
         format: date-time
       text:
-        title: "Text"
+        title: Text
         type: string
       link:
-        title: "Link"
+        title: Link
         type: string
       mentions:
         type: array
@@ -974,74 +946,71 @@ definitions:
         items:
           type: string
       stat:
-        $ref: "#/definitions/PostStat"
+        $ref: '#/definitions/PostStat'
       sponsor:
-        $ref: "#/definitions/Sponsor"
+        $ref: '#/definitions/Sponsor'
       image:
-        title: "Image"
+        title: Image
         type: string
       video:
-        title: "Video"
+        title: Video
         type: string
       thumbnail:
-        title: "Thumbnail"
+        title: Thumbnail
         type: string
-
   PostStat:
-    title: "Stat"
+    title: Stat
     type: object
     properties:
       likes:
-        title: "Likes"
+        title: Likes
         type: integer
       comments:
-        title: "Comments"
+        title: Comments
         type: integer
       views:
-        title: "Views"
+        title: Views
         type: integer
-
   Sponsor:
-    title: "Sponsor"
+    title: Sponsor
     type: object
     properties:
       user_id:
-        title: "User id"
+        title: User id
         type: string
       username:
-        title: "Username"
+        title: Username
         type: string
-
   PostWithoutImage:
     type: object
     properties:
       user_id:
-        title: "User id"
+        title: User id
         type: string
       username:
-        title: "Username"
+        title: Username
         type: string
       user_picture:
-        title: "User picture"
+        title: User picture
         type: string
       user_url:
-        title: "User url"
+        title: User url
         type: string
       type:
-        title: "Type"
+        title: Type
         type: string
       post_id:
-        title: "Post id"
+        title: Post id
         type: string
       created:
-        title: "Created"
+        title: Created
         type: string
         format: date-time
       text:
-        title: "Text"
+        title: Text
         type: string
       link:
-        title: "Link"
+        title: Link
         type: string
       mentions:
         type: array
@@ -1052,99 +1021,96 @@ definitions:
         items:
           type: string
       stat:
-        $ref: "#/definitions/PostStat"
+        $ref: '#/definitions/PostStat'
       sponsor:
-        $ref: "#/definitions/Sponsor"
-
+        $ref: '#/definitions/Sponsor'
   New_Report:
     title: New Influencer Report
     type: object
     properties:
       username:
         type: string
-
   Search:
     title: Search Influencers
     type: object
     properties:
       search:
         type: object
-        $ref: "#/definitions/Filters"
-
+        $ref: '#/definitions/Filters'
   Filters:
     title: Filters
     type: object
     properties:
       audience_age:
         type: array
-        $ref: "#/definitions/AudAge"
+        $ref: '#/definitions/AudAge'
       audience_brand:
         type: array
-        $ref: "#/definitions/AudBrand"
+        $ref: '#/definitions/AudBrand'
       audience_brand_category:
         type: array
-        $ref: "#/definitions/AudBrand"
+        $ref: '#/definitions/AudBrand'
       audience_gender:
         type: object
-        $ref: "#/definitions/AudGender"
+        $ref: '#/definitions/AudGender'
       audience_geo:
         type: array
-        $ref: "#/definitions/AudGeo"
+        $ref: '#/definitions/AudGeo'
       audience_lang:
         type: object
-        $ref: "#/definitions/AudLang"
+        $ref: '#/definitions/AudLang'
       audience_race:
         type: object
-        $ref: "#/definitions/AudRace"
+        $ref: '#/definitions/AudRace'
       brand:
         type: array
         items:
           type: integer
-        description: "You can get a valid brand id from our dictionary"
+        description: You can get a valid brand id from our dictionary
       brand_category:
         type: array
         items:
           type: integer
-        description: "You can get a valid interest (brand category) id from our dictionary"
+        description: You can get a valid interest (brand category) id from our dictionary
       engagements:
         type: object
-        $ref: "#/definitions/Engagements"
+        $ref: '#/definitions/Engagements'
       followers:
         type: object
-        $ref: "#/definitions/Followers"
+        $ref: '#/definitions/Followers'
       gender:
         type: object
-        $ref: "#/definitions/Gender"
+        $ref: '#/definitions/Gender'
       age:
         type: object
-        $ref: "#/definitions/Age"
+        $ref: '#/definitions/Age'
       geo:
         type: array
-        $ref: "#/definitions/Geo"
+        $ref: '#/definitions/Geo'
       lang:
         type: object
-        $ref: "#/definitions/Lang"
+        $ref: '#/definitions/Lang'
       race:
         type: object
-        $ref: "#/definitions/Race"
+        $ref: '#/definitions/Race'
       text:
         type: string
-        description: "Search phrase within influencer bio"
+        description: Search phrase within influencer bio
       engagement_rate:
         type: object
-        $ref: "#/definitions/EngageRate"
+        $ref: '#/definitions/EngageRate'
       is_business:
         type: boolean
-        description: "Only business account"
+        description: Only business account
       has_ads:
         type: boolean
-        description: "Has sponsored posts"
+        description: Has sponsored posts
       has_email:
         type: boolean
-        description: "Has contact details"
+        description: Has contact details
     example:
       audience_age:
-        - code: "18-24"
+        - code: 18-24
           weight: 0.01
       audience_brand:
         - id: 0
@@ -1153,16 +1119,16 @@ definitions:
         - id: 0
           weight: 0.05
       audience_gender:
-        code: "MALE"
+        code: MALE
         weight: 0.05
       audience_geo:
         - id: 0
           weight: 0.05
       audience_lang:
-        code: "en"
+        code: en
         weight: 0.2
       audience_race:
-        code: "Black"
+        code: Black
         weight: 0.3
       brand:
         - 0
@@ -1175,24 +1141,23 @@ definitions:
         left_number: 500000
         right_number: 1000000
       gender:
-        code: "MALE"
+        code: MALE
       age:
-        left_number: "18"
-        right_number: "35"
+        left_number: '18'
+        right_number: '35'
       geo:
         - id: 0
       lang:
-        code: "es"
+        code: es
       race:
-        code: "White"
-      text: "twitch"
+        code: White
+      text: twitch
       engagement_rate:
         value: 0
-        operator: "gte"
+        operator: gte
       is_business: true
       has_ads: true
       has_email: true
-
   AudAge:
     title: Audience Age
     items:
@@ -1200,38 +1165,53 @@ definitions:
       properties:
         code:
           type: string
-          enum: ["13-17", "18-24", "25-34", "35-44", "45-64", "65-"]
+          enum:
+            - 13-17
+            - 18-24
+            - 25-34
+            - 35-44
+            - 45-64
+            - 65-
         weight:
           type: number
-          description: "Default `0.01`"
+          description: Default `0.01`
       required:
         - code
-
   AudienceAge:
     type: object
     properties:
       code:
-        title: "Code"
+        title: Code
         type: string
-        enum: ["13-17", "18-24", "25-34", "35-44", "45-64", "65-"]
+        enum:
+          - 13-17
+          - 18-24
+          - 25-34
+          - 35-44
+          - 45-64
+          - 65-
       weight:
-        title: "Weight"
+        title: Weight
         type: number
-
   AudienceGenderPerAge:
     type: object
     properties:
       code:
-        title: "Code"
+        title: Code
         type: string
-        enum: ["13-17", "18-24", "25-34", "35-44", "45-64", "65-"]
+        enum:
+          - 13-17
+          - 18-24
+          - 25-34
+          - 35-44
+          - 45-64
+          - 65-
       male:
-        title: "Male"
+        title: Male
         type: number
       female:
-        title: "Female"
+        title: Female
         type: number
-
   AudBrand:
     title: Audience Brand
     items:
@@ -1241,64 +1221,63 @@ definitions:
           type: integer
         weight:
           type: number
-          description: "Default `0.05`"
+          description: Default `0.05`
       required:
         - id
-
   AudienceBrand:
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       interest:
         type: array
         items:
-          $ref: "#/definitions/Interest"
+          $ref: '#/definitions/Interest'
       weight:
-        title: "Weight"
+        title: Weight
         type: number
-
   AudienceInterest:
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       weight:
-        title: "Weight"
+        title: Weight
         type": number
-
   AudGender:
     title: Audience Gender
     type: object
     properties:
       code:
         type: integer
-        enum: ["MALE", "FEMALE"]
+        enum:
+          - MALE
+          - FEMALE
       weight:
         type: number
-        description: "Default `0.05`"
+        description: Default `0.05`
     required:
       - code
-
   AudienceGender:
     type: object
     properties:
       code:
-        title: "Code"
+        title: Code
         type: string
-        enum: ["MALE", "FEMALE"]
+        enum:
+          - MALE
+          - FEMALE
       weight:
-        title: "Weight"
+        title: Weight
         type: number
-
   AudGeo:
     title: Audience Geo
     items:
@@ -1306,105 +1285,98 @@ definitions:
       properties:
         id:
           type: integer
-          description: "You can get a valid id from location dictionary"
+          description: You can get a valid id from location dictionary
         weight:
           type: number
-          description: "Default `0.05`"
+          description: Default `0.05`
       required:
         - id
-
   AudienceGeo:
-    title: "Audience geo"
+    title: Audience geo
     type: object
     properties:
       countries:
         type: array
         items:
-          $ref: "#/definitions/AudienceGeoCountry"
+          $ref: '#/definitions/AudienceGeoCountry'
       states:
         type: array
         items:
-          $ref: "#/definitions/AudienceGeoState"
+          $ref: '#/definitions/AudienceGeoState'
       cities:
         type: array
         items:
-          $ref: "#/definitions/AudienceGeoCity"
-
+          $ref: '#/definitions/AudienceGeoCity'
   AudienceGeoCountry:
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       code:
-        title: "Code"
+        title: Code
         type: string
       weight:
-        title: "Weight"
+        title: Weight
         type: number
-
   EmbedGeoCountry:
-    title: "Country"
+    title: Country
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       code:
-        title: "Code"
+        title: Code
         type: string
-
   AudienceGeoState:
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       weight:
-        title: "Weight"
+        title: Weight
         type: number
       country:
-        $ref: "#/definitions/EmbedGeoCountry"
-
+        $ref: '#/definitions/EmbedGeoCountry'
   AudienceGeoCity:
     type: object
     properties:
       id:
-        title: "Id"
+        title: Id
         type: integer
       name:
-        title: "Name"
+        title: Name
         type: string
       coords:
-        $ref: "#/definitions/Coords"
+        $ref: '#/definitions/Coords'
       weight:
-        title: "Weight"
+        title: Weight
         type: number
       country:
-        $ref: "#/definitions/EmbedGeoCountry"
-
+        $ref: '#/definitions/EmbedGeoCountry'
   AudLang:
     title: Audience Lang
     type: object
     properties:
       code:
         type: string
-        description: "You can get a valid language code from our dictionary"
+        description: You can get a valid language code from our dictionary
       weight:
         type: number
-        description: "Default `0.2`"
+        description: Default `0.2`
     required:
       - code
-
   AudRace:
     title: Audience Race
     type: object
@@ -1414,25 +1386,31 @@ definitions:
         description: 'Enum: `"Black"` `"Asian"` `"White"` `"Hispanic"`'
       weight:
         type: number
-        description: "Default `0.3`"
+        description: Default `0.3`
     required:
       - code
-
   AudienceEthnicity:
     type: object
     properties:
       code:
-        title: "Code"
+        title: Code
         type: string
-        enum: ["white", "asian", "african_american", "hispanic"]
+        enum:
+          - white
+          - asian
+          - african_american
+          - hispanic
       name:
-        title: "Name"
+        title: Name
         type: string
-        enum: ["White / Caucasian", "Asian", "African American", "Hispanic"]
+        enum:
+          - White / Caucasian
+          - Asian
+          - African American
+          - Hispanic
       weight:
-        title: "Weight"
+        title: Weight
         type: number
-
   Engagements:
     title: Engagements
     type: object
@@ -1441,7 +1419,6 @@ definitions:
         type: integer
       right_number:
         type: integer
-
   Followers:
     title: Followers
     type: object
@@ -1450,7 +1427,6 @@ definitions:
         type: integer
       right_number:
         type: integer
-
   Gender:
     title: Gender
     type: object
@@ -1458,7 +1434,6 @@ definitions:
       code:
         type: string
         description: 'Enum: `"MALE"` `"FEMALE"` `"KNOWN"` `"UNKNOWN"`'
-
   Age:
     title: Age
     type: object
@@ -1469,7 +1444,6 @@ definitions:
       right_number:
         type: string
         description: 'Enum: `"18"` `"25"` `"35"` `"45"` `"65"`'
-
   Geo:
     title: Geo
     items:
@@ -1477,16 +1451,14 @@ definitions:
       properties:
         id:
           type: integer
-          description: "You can get a valid id from location dictionary"
-
+          description: You can get a valid id from location dictionary
   Lang:
     title: Lang
     type: object
     properties:
       code:
         type: string
-        description: "You can get a valid language code from our dictionary"
-
+        description: You can get a valid language code from our dictionary
   Race:
     title: Race
     type: object
@@ -1494,7 +1466,6 @@ definitions:
       code:
         type: string
         description: 'Enum: `"Black"` `"Asian"` `"White"` `"Hispanic"`'
-
   EngageRate:
     title: Engagement Rate
     type: object
@@ -1506,7 +1477,6 @@ definitions:
         description: 'Enum: `"lt"` `"lte"` `"gt"` `"gte"`   (Default: `"gte"`)'
     required:
       - value
-
   SearchResponse:
     title: Search Response
     type: object
@@ -1537,3 +1507,9 @@ definitions:
               properties:
                 extra:
                   type: object
+securityDefinitions:
+  api_token:
+    name: API Key
+    type: apiKey
+    in: query
+    description: ''
