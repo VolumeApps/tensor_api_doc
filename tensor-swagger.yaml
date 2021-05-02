@@ -1,15 +1,15 @@
 swagger: '2.0'
 info:
-  title: Tensor Social Docs
+  x-title: Tensor Social Docs
   x-stoplight:
     docs:
       showModels: false
-  version: '1.0'
+  version: '2.0'
   x-logo:
     url: 'https://dev.tensorsocial.com/static/media/LOGO_TS-1.ea9ea763.svg'
     backgroundColor: null
     altText: Tensor Social logo
-host: api.tensorsocial.com
+x-host: api.tensorsocial.com
 schemes:
   - https
 consumes:
