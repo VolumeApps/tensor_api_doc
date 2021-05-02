@@ -1,15 +1,24 @@
 swagger: '2.0'
 info:
-  x-title: Tensor Social Docs
+  title: Tensor Social Docs (v2)
   x-stoplight:
     docs:
       showModels: false
-  version: '2.0'
+  version: '1.0'
   x-logo:
     url: 'https://dev.tensorsocial.com/static/media/LOGO_TS-1.ea9ea763.svg'
     backgroundColor: null
     altText: Tensor Social logo
-x-host: api.tensorsocial.com
+  description: |
+    # Introduction
+    Tensor Social API provides access to the audience demographic and psychographic attributes of Instagram, YouTube and TikTok users based on their active audience and social media presence. We currently support user lookups by user ID or username for Instagram, YouTube and TikTok.
+
+    # Authentication
+    Authentication is handled via API tokens that you need to send as a query parameter when making any request to our API.
+
+    # Rate Limit
+    We are limiting one IP to 10 requests per second. If you are sending more requests you will receieve a 429 response status code.
+host: api.tensorsocial.com
 schemes:
   - https
 consumes:
