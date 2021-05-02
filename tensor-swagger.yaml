@@ -9,15 +9,6 @@ info:
     url: 'https://dev.tensorsocial.com/static/media/LOGO_TS-1.ea9ea763.svg'
     backgroundColor: null
     altText: Tensor Social logo
-  description: |
-    # Introduction
-    The Tensor Social API provides access to the audience demographic and psychographic attributes of Instagram users based on their active audience and social media presence. We currently support user lookups by user ID or username for Instagram.
-
-    # Authentication
-    Authentication is handled via API tokens that you need to send as a query parameter when making any request to our API.
-
-    # Rate Limit
-    We are limiting one IP to 10 requests per second. If you are sending more requests you will receieve a 429 response status code.
 host: api.tensorsocial.com
 schemes:
   - https
