@@ -231,13 +231,13 @@ paths:
             $ref: '#/definitions/SampleReport'
           examples: {}
   /story_analysis:
-    x-summary: Pull IG story details
+    x-summary: Story details
     get:
       tags:
         - Reports
-      summary: Pull IG story details
+      summary: Story details
       operationId: 'story-details'
-      description: Story details for Instagram
+      description: Pull IG story details for Instagram
       parameters:
         - in: query
           name: username
