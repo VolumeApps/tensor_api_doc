@@ -213,7 +213,7 @@ paths:
         - Reports
       summary: Fetch Report
       operationId: "fetch-report"
-      description: Fetch previously generated report. We are storing old reports for 30 days.
+      description: Fetch previously generated report
       parameters:
         - in: path
           name: report_id
@@ -230,6 +230,29 @@ paths:
           schema:
             $ref: '#/definitions/SampleReport'
           examples: {}
+  /story_analysis:
+    x-summary: Pull IG story details
+    get:
+      tags:
+        - Reports
+      summary: Pull IG story details
+      operationId: 'story-details'
+      description: Story details for Instagram
+      parameters:
+        - in: query
+          name: username
+          required: true
+          type: string
+        - in: query
+          name: api_token
+          required: true
+          type: string
+          description: Your api_token is required for this request
+      responses:
+        '200':
+          description: Successful
+          schema:
+            $ref: '#/definitions/SampleStory'
   /identification:
     x-summary: Search for influencers
     post:
@@ -392,6 +415,38 @@ definitions:
         $ref: '#/definitions/AudienceLikers'
       audience_followers:
         $ref: '#/definitions/AudienceFollowers'
+  SampleStory:
+    type: object
+    properties:
+      success:
+        type: boolean
+      message:
+        type: string
+      data:
+        type: object
+        properties:
+          stories:
+            type: array
+          stories_per_day:
+            type: number
+          replies:
+            type: number
+          back:
+            type: number
+          estimated_impressions:
+            type: number
+          estimated_reach:
+            type: number
+          estimated_swipe_ups:
+            type: number
+          exits:
+            type: number
+          forwards:
+            type: number
+          has_stories:
+            type: boolean
+          is_private:
+            type: boolean
   SampleList:
     type: object
     properties:
