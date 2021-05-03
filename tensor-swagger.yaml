@@ -1102,7 +1102,7 @@ definitions:
       audience_race:
         $ref: '#/definitions/AudRace'
       audience_relevance:
-        $ref: ''
+        $ref: '#/definitions/AudienceRelevance'
       audience_credibility:
         title: Audience credibility
         description: Minimum audience credibility for audience of the influencer
@@ -1126,7 +1126,7 @@ definitions:
       engagements:
         $ref: '#/definitions/Engagements'
       views:
-        $ref: ''
+        $ref: '#/definitions/Views'
       followers:
         $ref: '#/definitions/Followers'
       gender:
@@ -1138,7 +1138,7 @@ definitions:
       lang:
         $ref: '#/definitions/Lang'
       relevance:
-        $ref: ''
+        $ref: '#/definitions/Relevance'
       text:
         type: string
         description: Search phrase within influencer bio
@@ -1459,6 +1459,15 @@ definitions:
         default: 0.3
     required:
       - code
+  AudienceRelevance:
+    type: object
+    required:
+      - value
+    description: Has lookalike audience of specified influencer. Lookalike means that audience follows accounts with the same topic as an audience of specified account.
+    properties:
+      value:
+        type: string
+        minLength: 1
   AudienceEthnicity:
     type: object
     properties:
@@ -1484,6 +1493,14 @@ definitions:
   Engagements:
     title: Engagements
     type: object
+    properties:
+      left_number:
+        type: integer
+      right_number:
+        type: integer
+  Views:
+    type: object
+    description: We round views value in the filter to the nearest thousand (1400 -> 1k; 1500-> 2k)
     properties:
       left_number:
         type: integer
@@ -1530,6 +1547,20 @@ definitions:
       code:
         type: string
         description: You can get a valid language code from our dictionary
+  Relevance:
+    type: object
+    description: Filter by topic of influencers posts of by similarity of topic to other influencer
+    required:
+      - value
+    properties:
+      value:
+        type: string
+        minLength: 1
+      weight:
+        type: number
+        default: 0.5
+        minimum: 0
+        maximum: 1
   EngageRate:
     title: Engagement Rate
     type: object
