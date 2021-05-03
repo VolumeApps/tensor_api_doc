@@ -231,11 +231,11 @@ paths:
             $ref: '#/definitions/SampleReport'
           examples: {}
   /story_analysis:
-    x-summary: Story details
+    x-summary: Story Details
     get:
       tags:
         - Reports
-      summary: Story details
+      summary: Story Details
       operationId: 'story-details'
       description: Pull IG story details for Instagram
       parameters:
@@ -243,6 +243,7 @@ paths:
           name: username
           required: true
           type: string
+          description: Username or Instagram id for account
         - in: query
           name: api_token
           required: true
@@ -363,7 +364,11 @@ definitions:
           type: array
           items:
             type: string
-            description: 'Enum: `"city"` `"state"` `"country"`'
+            enum: [
+              "city",
+              "state",
+              "country"
+            ]
         name:
           type: string
           description: Name of geo location
@@ -1164,10 +1169,15 @@ definitions:
         type: number
       audience_credibility_class:
         type: array
-        description: 'Enum: `"bad"` `"low"` `"normal"` `"high"` `"best"`'
         items:
           type: string
-          minLength: 1
+          enum: [
+            "bad",
+            "low",
+            "normal",
+            "high",
+            "best",
+          ]
       brand:
         type: array
         items:
@@ -1197,11 +1207,9 @@ definitions:
       text:
         type: string
         description: Search phrase within influencer bio
-        minLength: 1
       keywords:
         type: string
         description: Search phrase influencers use when speaking in their videos
-        minLength: 1
       engagement_rate:
         $ref: '#/definitions/EngageRate'
       is_hidden:
@@ -1233,7 +1241,7 @@ definitions:
       with_contact:
         type: array
         items:
-          $ref: '#/definitions/FilterWithContact'
+          $ref: '#/definitions/WithContact'
   SearchSort:
     title: Sort
     type: object
@@ -1508,7 +1516,12 @@ definitions:
     properties:
       code:
         type: string
-        description: 'Enum: `"Black"` `"Asian"` `"White"` `"Hispanic"`'
+        enum: [
+          "Black",
+          "Asian",
+          "White",
+          "Hispanic"
+        ]
       weight:
         type: number
         default: 0.3
@@ -1555,7 +1568,7 @@ definitions:
         type: integer
   Views:
     type: object
-    description: We round views value in the filter to the nearest thousand (1400 -> 1k; 1500-> 2k)
+    description: We round views value in the filter to the nearest thousand
     properties:
       left_number:
         type: integer
@@ -1575,17 +1588,34 @@ definitions:
     properties:
       code:
         type: string
-        description: 'Enum: `"MALE"` `"FEMALE"` `"KNOWN"` `"UNKNOWN"`'
+        enum: [
+          "MALE",
+          "FEMALE",
+          "KNOWN",
+          "UNKNOWN"
+        ]
   Age:
     title: Age
     type: object
     properties:
       left_number:
         type: string
-        description: 'Enum: `"18"` `"25"` `"35"` `"45"` `"65"`'
+        enum: [
+          "18",
+          "25",
+          "35",
+          "45",
+          "65"
+        ]
       right_number:
         type: string
-        description: 'Enum: `"18"` `"25"` `"35"` `"45"` `"65"`'
+        enum: [
+          "18",
+          "25",
+          "35",
+          "45",
+          "65"
+        ]
   Geo:
     type: array
     title: Geo
@@ -1624,10 +1654,16 @@ definitions:
         type: number
       operator:
         type: string
-        description: 'Enum: `"lt"` `"lte"` `"gt"` `"gte"`   (Default: `"gte"`)'
+        enum: [
+          "lt",
+          "lte",
+          "gt",
+          "gte",
+        ]
+        default: "gte"
     required:
       - value
-  FilterWithContact:
+  WithContact:
     type: object
     required:
       - type
