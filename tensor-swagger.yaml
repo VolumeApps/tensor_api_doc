@@ -1,6 +1,9 @@
 swagger: '2.0'
 info:
   title: Tensor Social Docs (v2)
+  contact:
+    name: Tensor Social
+    email: hello@tensorsocial.com
   x-stoplight:
     docs:
       showModels: false
@@ -11,7 +14,7 @@ info:
     altText: Tensor Social logo
   description: |
     # Introduction
-    Tensor Social API provides access to the audience demographic and psychographic attributes of Instagram, YouTube and TikTok users based on their active audience and social media presence. We currently support user lookups by user ID or username for Instagram, YouTube and TikTok.
+    The Tensor Social API provides access to the audience demographic and psychographic attributes of Instagram, YouTube and TikTok users based on their active audience and social media presence. We currently support user lookups by user ID or username for Instagram, YouTube and TikTok.
 
     # Authentication
     Authentication is handled via API tokens that you need to send as a query parameter when making any request to our API.
@@ -327,23 +330,27 @@ definitions:
               type: string
   location_response:
     title: Locations Response
-    type: object
-    properties:
-      id:
-        type: integer
-      type:
-        type: string
-        description: 'Enum: `"city"` `"state"` `"country"`'
-      name:
-        type: string
-        description: Name of geo location
-      title:
-        type: string
-        description: 'Name of geo location with country name, e.g. ''Paris, France'''
-      state:
-        $ref: '#/definitions/locationObject'
-      country:
-        $ref: '#/definitions/locationObject'
+    type: array
+    items:
+      type: object
+      properties:
+        id:
+          type: integer
+        type:
+          type: array
+          items:
+            type: string
+            description: 'Enum: `"city"` `"state"` `"country"`'
+        name:
+          type: string
+          description: Name of geo location
+        title:
+          type: string
+          description: 'Name of geo location with country name, e.g. ''Paris, France'''
+        state:
+          $ref: '#/definitions/locationObject'
+        country:
+          $ref: '#/definitions/locationObject'
   locationObject:
     title: Location Object
     type: object
@@ -422,29 +429,50 @@ definitions:
   ExamplePost:
     type: object
     properties:
-      user_id: string
-      username: string
-      user_picture: string
-      user_url: string
-      type: string
-      post_id: string
-      created: '2019-04-22T14:12:49Z'
-      text: string
-      link: string
+      user_id:
+        type: string
+      username:
+        type: string
+      user_picture:
+        type: string
+      user_url:
+        type: string
+      type:
+        type: string
+      post_id:
+        type: string
+      created:
+        type: string
+      text:
+        type: string
+      link:
+        type: string
       mentions:
-        - string
+        type: array
       hashtags:
-        - string
+        type: array
       stat:
-        likes: 0
-        comments: 0
-        views: 0
+        type: object
+        properties:
+          likes:
+            type: integer
+          comments:
+            type: integer
+          views:
+            type: integer
       sponsor:
-        user_id: string
-        username: string
-      image: string
-      video: string
-      thumbnail: string
+        type: object
+        properties:
+          user_id:
+            type: string
+          username:
+            type: string
+      image:
+        type: string
+      video:
+        type: string
+      thumbnail:
+        type: string
   UserProfile:
     title: User profile
     type: object
@@ -637,7 +665,7 @@ definitions:
         title: Error
         description: Code for reason of lack of report. Only if success=false
         type: string
-        enum":
+        enum:
           - empty_audience
       error_message:
         title: Error message
@@ -762,7 +790,7 @@ definitions:
         type: string
   Coords:
     title: Coords
-    type": object
+    type: object
     properties:
       lat:
         title: Lat
@@ -775,7 +803,7 @@ definitions:
     properties:
       type:
         title: Type
-        type": string
+        type: string
         enum:
           - youtube
           - snapchat
@@ -886,7 +914,7 @@ definitions:
     type: object
     properties:
       user_id:
-        title": User id
+        title: User id
         type: string
       username:
         title: Username
@@ -1044,10 +1072,18 @@ definitions:
   Search:
     title: Search Influencers
     type: object
+    required:
+      - search
+      - sort
+      - paging
     properties:
       search:
-        $ref: '#/definitions/Filters'
-  Filters:
+        $ref: '#/definitions/SearchFilters'
+      sort:
+        $ref: '#/definitions/SearchSort'
+      paging:
+        $ref: '#/definitions/SearchPaging'
+  SearchFilters:
     title: Filters
     type: object
     properties:
@@ -1065,6 +1101,18 @@ definitions:
         $ref: '#/definitions/AudLang'
       audience_race:
         $ref: '#/definitions/AudRace'
+      audience_relevance:
+        $ref: ''
+      audience_credibility:
+        title: Audience credibility
+        description: Minimum audience credibility for audience of the influencer
+        type: number
+      audience_credibility_class:
+        type: array
+        description: 'Enum: `"bad"` `"low"` `"normal"` `"high"` `"best"`'
+        items:
+          type: string
+          minLength: 1
       brand:
         type: array
         items:
@@ -1077,6 +1125,8 @@ definitions:
         description: You can get a valid interest (brand category) id from our dictionary
       engagements:
         $ref: '#/definitions/Engagements'
+      views:
+        $ref: ''
       followers:
         $ref: '#/definitions/Followers'
       gender:
@@ -1087,72 +1137,92 @@ definitions:
         $ref: '#/definitions/Geo'
       lang:
         $ref: '#/definitions/Lang'
-      race:
-        $ref: '#/definitions/Race'
+      relevance:
+        $ref: ''
       text:
         type: string
         description: Search phrase within influencer bio
+        minLength: 1
+      keywords:
+        type: string
+        description: Search phrase influencers use when speaking in their videos
+        minLength: 1
       engagement_rate:
         $ref: '#/definitions/EngageRate'
-      is_business:
+      is_hidden:
+        title: Is hidden
+        description:  Shows only private (=true) or public (=false) accounts
         type: boolean
-        description: Only business account
+      is_verified:
+        title: Is verified
+        description: Shows only verified if `true` value passed.
+        type: boolean
+      is_official_artist:
+        title: Is official artist
+        description: Exclude(=false) or show only (=true) channels with Official artist label
+        type: boolean
+      last_posted:
+        title: Last posted
+        description: Maximum number of days since last post of influencer
+        type: integer
+        minimum: 30
+      account_type:
+        type: array
+        description: Filter by account types, 1 - Regular, 2 - Business, 3 - Creator. For example, to get business or creator accounts pass [2,3] value to this filter.
+        items:
+          type: integer
       has_ads:
+        title: Has ads
         type: boolean
-        description: Has sponsored posts
-      has_email:
-        type: boolean
-        description: Has contact details
-    example:
-      audience_age:
-        - code: 18-24
-          weight: 0.01
-      audience_brand:
-        - id: 0
-          weight: 0.05
-      audience_brand_category:
-        - id: 0
-          weight: 0.05
-      audience_gender:
-        code: MALE
-        weight: 0.05
-      audience_geo:
-        - id: 0
-          weight: 0.05
-      audience_lang:
-        code: en
-        weight: 0.2
-      audience_race:
-        code: Black
-        weight: 0.3
-      brand:
-        - 0
-      brand_category:
-        - 0
-      engagements:
-        left_number: 1000
-        right_number: 200000
-      followers:
-        left_number: 500000
-        right_number: 1000000
-      gender:
-        code: MALE
-      age:
-        left_number: '18'
-        right_number: '35'
-      geo:
-        - id: 0
-      lang:
-        code: es
-      race:
-        code: White
-      text: twitch
-      engagement_rate:
-        value: 0
-        operator: gte
-      is_business: true
-      has_ads: true
-      has_email: true
+        description: If `true` value passed then shows accounts only having sponsored posts
+      with_contact:
+        type: array
+        items:
+          $ref: '#/definitions/FilterWithContact'
+  SearchSort:
+    title: Sort
+    type: object
+    required:
+      - field
+    properties:
+      field:
+        title: Field
+        type: string
+        enum: [
+          "engagements",
+          "followers",
+          "engagement_rate",
+          "keywords",
+          "views",
+          "audience_geo",
+          "audience_lang",
+          "audience_brand",
+          "audience_brand_category",
+          "audience_gender",
+          "audience_race",
+          "audience_age",
+          "relevance",
+          "audience_relevance"
+        ]
+      direction:
+        title: Direction
+        type: string
+        enum: ["desc"]
+        default: desc
+  SearchPaging:
+    title: Paging
+    type: object
+    required:
+      - limit
+    properties:
+      limit:
+        title: Limit
+        type: integer
+        maximum: 100
+      skip:
+        title: Skip
+        type: integer
+        default: 0
   AudAge:
     type: array
     title: Audience Age
@@ -1170,7 +1240,7 @@ definitions:
             - 65-
         weight:
           type: number
-          description: Default `0.01`
+          default: 0.25
       required:
         - code
   AudienceAge:
@@ -1218,7 +1288,7 @@ definitions:
           type: integer
         weight:
           type: number
-          description: Default `0.05`
+          default: 0.1
       required:
         - id
   AudienceBrand:
@@ -1248,7 +1318,7 @@ definitions:
         type: string
       weight:
         title: Weight
-        type": number
+        type: number
   AudGender:
     title: Audience Gender
     type: object
@@ -1260,7 +1330,7 @@ definitions:
           - FEMALE
       weight:
         type: number
-        description: Default `0.05`
+        default: 0.5
     required:
       - code
   AudienceGender:
@@ -1286,7 +1356,7 @@ definitions:
           description: You can get a valid id from location dictionary
         weight:
           type: number
-          description: Default `0.05`
+          default: 0.05
       required:
         - id
   AudienceGeo:
@@ -1370,9 +1440,11 @@ definitions:
       code:
         type: string
         description: You can get a valid language code from our dictionary
+        maxLength: 2
+        minLength: 1
       weight:
         type: number
-        description: Default `0.2`
+        default: 0.2
     required:
       - code
   AudRace:
@@ -1384,7 +1456,7 @@ definitions:
         description: 'Enum: `"Black"` `"Asian"` `"White"` `"Hispanic"`'
       weight:
         type: number
-        description: Default `0.3`
+        default: 0.3
     required:
       - code
   AudienceEthnicity:
@@ -1458,13 +1530,6 @@ definitions:
       code:
         type: string
         description: You can get a valid language code from our dictionary
-  Race:
-    title: Race
-    type: object
-    properties:
-      code:
-        type: string
-        description: 'Enum: `"Black"` `"Asian"` `"White"` `"Hispanic"`'
   EngageRate:
     title: Engagement Rate
     type: object
@@ -1476,6 +1541,47 @@ definitions:
         description: 'Enum: `"lt"` `"lte"` `"gt"` `"gte"`   (Default: `"gte"`)'
     required:
       - value
+  FilterWithContact:
+    type: object
+    required:
+      - type
+    properties:
+      type:
+        title: Type
+        type: string
+        enum: [
+          "bbm",
+          "email",
+          "facebook",
+          "instagram",
+          "itunes",
+          "kakao",
+          "kik",
+          "lineid",
+          "linktree",
+          "phone",
+          "pinterest",
+          "sarahah",
+          "sayat",
+          "skype",
+          "snapchat",
+          "telegram",
+          "tiktok",
+          "tumblr",
+          "twitchtv",
+          "twitter",
+          "viber",
+          "vk",
+          "wechat",
+          "weibo",
+          "whatsapp",
+          "youtube"
+        ]
+      action:
+        title: Action
+        type: string
+        enum: ["must", "should", "not"]
+        default: should
   SearchResponse:
     title: Search Response
     type: object
