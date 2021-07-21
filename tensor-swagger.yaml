@@ -51,7 +51,7 @@ paths:
       tags:
         - Account
       summary: List Account Info
-      operationId: "account-info"
+      operationId: account-info
       description: Returns account info and credit total
       parameters:
         - in: query
@@ -77,7 +77,7 @@ paths:
       tags:
         - Dictionaries
       summary: List Brands & Interests
-      operationId: "brands-and-interests"
+      operationId: brands-and-interests
       description: List of all interests and brand that can be used as filter in Search or may be returned in Audience Data report.
       responses:
         '200':
@@ -101,7 +101,7 @@ paths:
       tags:
         - Dictionaries
       summary: List Locations
-      operationId: "locations"
+      operationId: locations
       description: List geo locations under certain filters.
       parameters:
         - in: query
@@ -147,7 +147,7 @@ paths:
       tags:
         - Dictionaries
       summary: List Languages
-      operationId: "languages"
+      operationId: languages
       description: List all supported languages ordered by descend of their frequency. They can be used as filter in Search or may be returned in Audience Data report. We recommend that you cache this dictionary because it updates rarely.
       responses:
         '200':
@@ -168,7 +168,7 @@ paths:
       tags:
         - Reports
       summary: List All Reports
-      operationId: "all-reports"
+      operationId: all-reports
       description: List audience data reports history
       parameters:
         - in: query
@@ -187,7 +187,7 @@ paths:
       tags:
         - Reports
       summary: Generate New Report
-      operationId: "new-report"
+      operationId: new-report
       description: Creates new audience data report. Both for likers and followers at the same time.
       parameters:
         - in: query
@@ -212,7 +212,7 @@ paths:
       tags:
         - Reports
       summary: Fetch Report
-      operationId: "fetch-report"
+      operationId: fetch-report
       description: Fetch previously generated report
       parameters:
         - in: path
@@ -236,7 +236,7 @@ paths:
       tags:
         - Reports
       summary: Story Details
-      operationId: 'story-details'
+      operationId: story-details
       description: Pull IG story details for Instagram
       parameters:
         - in: query
@@ -260,8 +260,8 @@ paths:
       tags:
         - Identification
       summary: Search for influencers
-      operationId: "search-influencers"
-      description: Influencer search for Instagram, YouTube, & TikTok
+      operationId: search-influencers
+      description: 'Influencer search for Instagram, YouTube, & TikTok'
       parameters:
         - in: query
           name: api_token
@@ -364,11 +364,10 @@ definitions:
           type: array
           items:
             type: string
-            enum: [
-              "city",
-              "state",
-              "country"
-            ]
+            enum:
+              - city
+              - state
+              - country
         name:
           type: string
           description: Name of geo location
@@ -1129,13 +1128,16 @@ definitions:
     properties:
       username:
         type: string
+      platform:
+        type: string
+        enum:
+          - instagram
+          - youtube
+          - tiktok
+      
   Search:
     title: Search Influencers
     type: object
-    required:
-      - search
-      - sort
-      - paging
     properties:
       search:
         $ref: '#/definitions/SearchFilters'
@@ -1143,6 +1145,17 @@ definitions:
         $ref: '#/definitions/SearchSort'
       paging:
         $ref: '#/definitions/SearchPaging'
+      platform:
+        type: string
+        enum:
+          - instagram
+          - youtube
+          - tiktok
+    required:
+      - search
+      - sort
+      - paging
+      - platform
   SearchFilters:
     title: Filters
     type: object
@@ -1171,13 +1184,12 @@ definitions:
         type: array
         items:
           type: string
-          enum: [
-            "bad",
-            "low",
-            "normal",
-            "high",
-            "best",
-          ]
+          enum:
+            - bad
+            - low
+            - normal
+            - high
+            - best
       brand:
         type: array
         items:
@@ -1214,7 +1226,7 @@ definitions:
         $ref: '#/definitions/EngageRate'
       is_hidden:
         title: Is hidden
-        description:  Shows only private (=true) or public (=false) accounts
+        description: Shows only private (=true) or public (=false) accounts
         type: boolean
       is_verified:
         title: Is verified
@@ -1231,7 +1243,7 @@ definitions:
         minimum: 30
       account_type:
         type: array
-        description: Filter by account types, 1 - Regular, 2 - Business, 3 - Creator. For example, to get business or creator accounts pass [2,3] value to this filter.
+        description: 'Filter by account types, 1 - Regular, 2 - Business, 3 - Creator. For example, to get business or creator accounts pass [2,3] value to this filter.'
         items:
           type: integer
       has_ads:
@@ -1251,26 +1263,26 @@ definitions:
       field:
         title: Field
         type: string
-        enum: [
-          "engagements",
-          "followers",
-          "engagement_rate",
-          "keywords",
-          "views",
-          "audience_geo",
-          "audience_lang",
-          "audience_brand",
-          "audience_brand_category",
-          "audience_gender",
-          "audience_race",
-          "audience_age",
-          "relevance",
-          "audience_relevance"
-        ]
+        enum:
+          - engagements
+          - followers
+          - engagement_rate
+          - keywords
+          - views
+          - audience_geo
+          - audience_lang
+          - audience_brand
+          - audience_brand_category
+          - audience_gender
+          - audience_race
+          - audience_age
+          - relevance
+          - audience_relevance
       direction:
         title: Direction
         type: string
-        enum: ["desc"]
+        enum:
+          - desc
         default: desc
   SearchPaging:
     title: Paging
@@ -1516,12 +1528,11 @@ definitions:
     properties:
       code:
         type: string
-        enum: [
-          "Black",
-          "Asian",
-          "White",
-          "Hispanic"
-        ]
+        enum:
+          - Black
+          - Asian
+          - White
+          - Hispanic
       weight:
         type: number
         default: 0.3
@@ -1588,34 +1599,31 @@ definitions:
     properties:
       code:
         type: string
-        enum: [
-          "MALE",
-          "FEMALE",
-          "KNOWN",
-          "UNKNOWN"
-        ]
+        enum:
+          - MALE
+          - FEMALE
+          - KNOWN
+          - UNKNOWN
   Age:
     title: Age
     type: object
     properties:
       left_number:
         type: string
-        enum: [
-          "18",
-          "25",
-          "35",
-          "45",
-          "65"
-        ]
+        enum:
+          - '18'
+          - '25'
+          - '35'
+          - '45'
+          - '65'
       right_number:
         type: string
-        enum: [
-          "18",
-          "25",
-          "35",
-          "45",
-          "65"
-        ]
+        enum:
+          - '18'
+          - '25'
+          - '35'
+          - '45'
+          - '65'
   Geo:
     type: array
     title: Geo
@@ -1654,13 +1662,12 @@ definitions:
         type: number
       operator:
         type: string
-        enum: [
-          "lt",
-          "lte",
-          "gt",
-          "gte",
-        ]
-        default: "gte"
+        enum:
+          - lt
+          - lte
+          - gt
+          - gte
+        default: gte
     required:
       - value
   WithContact:
@@ -1671,38 +1678,40 @@ definitions:
       type:
         title: Type
         type: string
-        enum: [
-          "bbm",
-          "email",
-          "facebook",
-          "instagram",
-          "itunes",
-          "kakao",
-          "kik",
-          "lineid",
-          "linktree",
-          "phone",
-          "pinterest",
-          "sarahah",
-          "sayat",
-          "skype",
-          "snapchat",
-          "telegram",
-          "tiktok",
-          "tumblr",
-          "twitchtv",
-          "twitter",
-          "viber",
-          "vk",
-          "wechat",
-          "weibo",
-          "whatsapp",
-          "youtube"
-        ]
+        enum:
+          - bbm
+          - email
+          - facebook
+          - instagram
+          - itunes
+          - kakao
+          - kik
+          - lineid
+          - linktree
+          - phone
+          - pinterest
+          - sarahah
+          - sayat
+          - skype
+          - snapchat
+          - telegram
+          - tiktok
+          - tumblr
+          - twitchtv
+          - twitter
+          - viber
+          - vk
+          - wechat
+          - weibo
+          - whatsapp
+          - youtube
       action:
         title: Action
         type: string
-        enum: ["must", "should", "not"]
+        enum:
+          - must
+          - should
+          - not
         default: should
   SearchResponse:
     title: Search Response
